@@ -5,5 +5,6 @@ CommmonInteger.py - Find the common integer given a list
 Fib.py - Fibonacci number generator  
 FizzBuzz.py - Classic FizzBuzz test  
 MatLibTest.py - Testing the matlib python module
-![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/matlib1.PNG)
+![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/matlib1.PNG)  
+
 ReverseString.py - Reverse a given string  

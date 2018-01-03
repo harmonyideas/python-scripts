@@ -10,5 +10,5 @@ MatLibTest.py - Testing the matlib python module
 
 ReverseString.py - Reverse a given string  
 Probability.py - Pytude tutorial  
-HashTable.py - Very simple example of a hash table using Dan Bernstein's hash function.
+HashTable.py - Very simple example of a hash table using Dan Bernstein's hash function.  
 AppSync.ps1 - Simple powershell script created to sync files across multiple offices.  Uses RoboCopy

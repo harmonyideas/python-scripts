@@ -12,7 +12,8 @@ FizzBuzz.py     |   Classic FizzBuzz test
 ReverseString.py | Simple function to reverse a given string  
 Probability.py   | Code written for a Pytude tutorial  
 HashTable.py     | Very simple example of a hash table using Dan Bernstein's hash function.  
-MatLibTest.py    | ![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/matlib1.PNG)   
+MatLibTest.py    | Test ![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/matlib1.PNG)  
+
 
 
 

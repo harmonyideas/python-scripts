@@ -2,6 +2,7 @@
 Just some random scripts with Python
 
 CommmonInteger.py - Find the common integer given a list  
+Deckofcards.py - Very simple class for a deck of cards.  
 Fib.py - Fibonacci number generator  
 FizzBuzz.py - Classic FizzBuzz test  
 MatLibTest.py - Testing the matlib python module  

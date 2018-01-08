@@ -11,8 +11,8 @@ Fib.py          |   Fibonacci number generator
 FizzBuzz.py     |   Classic FizzBuzz test  
 ReverseString.py | Simple function to reverse a given string  
 Probability.py   | Code written for a Pytude tutorial  
-https://github.com/loginHashTable.py     | Very simple example of a hash table using Dan Bernstein's hash function. 
-Nettester2.py    | Simple flask web service for NetTester Android Application
+https://github.com/loginHashTable.py     | Very simple example of a hash table using Dan Bernstein's hash function.  
+Nettester2.py    | Simple flask web service for NetTester Android Application  
 MatLibTest.py    | ![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/matlib1.PNG)  
 
 

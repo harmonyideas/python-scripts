@@ -8,6 +8,7 @@ Deckofcards.py  |   Very simple class for a deck of cards.
 Myblockchain.py | Very simple example of a blockchain  
 Flashcards.py   |   Quick example of a math flash cards game.  
 Fib.py          |   Fibonacci number generator  
+[a relative link] | (FizzBuzz.py)
 FizzBuzz.py     |   Classic FizzBuzz test  
 ReverseString.py | Simple function to reverse a given string  
 Probability.py   | Code written for a Pytude tutorial   

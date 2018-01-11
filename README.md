@@ -5,7 +5,7 @@ FileName      | Description
 ------------- | -------------
 CommmonInteger.py  | Find the common integer given a list
 Deckofcards.py  |   Simple class for a deck of cards.
-Dictionary.py   |   Simple Flask Web service dictionary search example
+Dictionary.py   |   Search JSON dictionary using Flask web service
 Myblockchain.py | Quick example of a blockchain 
 Databaseadapter.cs  | Simple example of a interface for various database connections  
 Flashcards.py   |   Quick example of a math flash cards game.  

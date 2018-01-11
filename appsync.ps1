@@ -49,20 +49,6 @@ Function GenerateForm {
 					{	 
 						$id = Invoke-Expression ("`$checkBox$($y).Text")
 						$checkBoxID = Invoke-Expression("($y)")
-						
-						if ($id -eq "UAT")
-						{
-						$file_paths = Parse-XML $InputFileName -InformationType file_paths -OfficeID $id
-						$targetUAT = $target_server + $file_paths.target
-						Write-Progress -Activity "Synchronizing: " -status "$($file_paths.source) TO $($target_server) AND $($CheckBoxID) AND $($targetUAT)"
-						CopyFolder $file_paths.source $targetUAT $file_paths.id $checkBoxID	
-						}
-						else
-						{
-						$file_paths = Parse-XML $InputFileName -InformationType file_paths -OfficeID $id
-						Write-Progress -Activity "Synchronizing: " -status "$($file_paths.source) TO $($target_server) AND $($CheckBoxID)"
-						CopyFolder $file_paths.source $target_server $file_paths.id $checkBoxID
-						}
 					}
 				}		
 			}

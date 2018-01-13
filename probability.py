@@ -28,6 +28,5 @@ def find(items, search, n):
 
 
 cards = combine('A23456789TJQK', 'CHDS')
-print(len(cards))
 cards_combos = combo(cards, 2)
-print(random.sample(cards_combos, 5))
+

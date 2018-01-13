@@ -16,7 +16,6 @@ Probability.py   | Code written for a Pytude tutorial
 HashTable.py     | Very simple example of a hash table using Dan Bernstein's hash function.  
 Nettester2.py    | Simple flask web service for NetTester Android Application  
 MatLibTest.py    | ![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/matlib1.PNG)
-TicTacToe.py    |  Very simple Tic-Tac-Toe game testing wxPython. ![SCREENSHOT2](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/tictactoe2.PNG?raw=true "TICKTACTOE-2")
 AppSync.ps1   | Simple powershell script created to sync files across multiple servers.  Uses RoboCopy and XML file for configuration of source/destination directories. ![SCREENSHOT1](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/AppSync1.PNG)  
 
 

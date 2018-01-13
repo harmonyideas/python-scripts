@@ -40,7 +40,7 @@ Function GenerateForm {
 		if ($dropdownBox.SelectedItem.ToString() -eq "ALL-SERVERS") 
 		{
 			$target_paths = Parse-XML $InputFileName -InformationType "ALL"
-			foreach ($target_server in $target_paths.netlogon_path)
+			foreach ($target_server in $target_paths.path)
 			{
 				for ($y=1;$y -lt $num_checkboxes; $y++) 
 				{
@@ -68,7 +68,7 @@ Function GenerateForm {
 					{
 						$file_paths = Parse-XML $InputFileName -InformationType file_paths -OfficeID $id
 						$target_paths = Parse-XML $InputFileName -InformationType "domain_controllers" -ServerID $dropdownBox.SelectedItem.ToString()
-						$targetUAT = $target_paths.netlogon_path + $file_paths.target
+						$targetUAT = $target_paths.path + $file_paths.target
 						Write-Progress -Activity "Synchronizing: " -status "$($file_paths.source) TO $($target_server) AND $($CheckBoxID) AND $($target_server)"
 						CopyFolder $file_paths.source $targetUAT "" $checkBoxID	
 					}
@@ -76,8 +76,8 @@ Function GenerateForm {
 					{
 						$file_paths = Parse-XML $InputFileName -InformationType file_paths -OfficeID $id
 						$target_paths = Parse-XML $InputFileName -InformationType "domain_controllers" -ServerID $dropdownBox.SelectedItem.ToString()
-						Write-Progress -Activity "Synchronizing: " -status "$($file_paths.source) TO $($target_paths.netlogon_path)"
-						CopyFolder $file_paths.source $target_paths.netlogon_path $file_paths.id $checkBoxID
+						Write-Progress -Activity "Synchronizing: " -status "$($file_paths.source) TO $($target_paths.path)"
+						CopyFolder $file_paths.source $target_paths.path $file_paths.id $checkBoxID
 					}
 			}
 		}		

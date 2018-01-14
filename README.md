@@ -3,6 +3,7 @@ Just some random scripts
 
 FileName      | Description
 ------------- | -------------
+BubbleSortAnimation.py  | Dynamic animation of a bubble sort using matplotlib and bar graphs.
 CommmonInteger.py  | Find the common integer given a list
 Deckofcards.py  |   Simple class for a deck of cards.
 Dictionary.py   |   Search JSON dictionary using Flask WS [Search Page - index.html provided in /Templates] 

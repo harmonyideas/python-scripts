@@ -4,9 +4,7 @@ import numpy as np
 
 plt.style.use(['ggplot'])
 plt.figure(num=None, figsize=(13, 8), dpi=80, facecolor='w', edgecolor='k')
-
 a_list = random.sample(range(50), 50)
-
 y_pos = np.arange(len(a_list))
 
 

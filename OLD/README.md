@@ -3,7 +3,8 @@ Just some random scripts
 
 FileName      | Description
 ------------- | -------------
-bubblesort.py  | Simple bubble sort example  
+bubblesort.py  | Simple bubble sort example 
+BubbleSortAnimation.py  | Dynamic animation of a bubble sort using matplotlib and bar graphs.  
 commoninteger.py  |   Find common integer from list.  
 databaseadapter.cs   |   C# database adapter 
 deckofcards.py | Class for deck of cards       

@@ -6,11 +6,7 @@ class Cards(object):
         self.value = ('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K')
         self.rank = ['c', 'd', 'h', 's']
         Cards.deck = range(52)
-
-        for x in self.value:
-            for y in self.rank:
-                Cards.deck[counter] = (x + y)
-                counter += 1
+        Cards.deck = [(A + B) for A in self.value for B in self.rank]
 
 
 def pick_random_cards(counter):

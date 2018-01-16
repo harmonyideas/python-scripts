@@ -55,7 +55,6 @@ class MyBlockChain(object):
         :param proof:
         :return:
         """
-
         guess = '{last_proof}{proof}'.encode().format(last_proof=last_proof,proof=proof)
         guess_hash = hashlib.sha256(guess).hexdigest()
 

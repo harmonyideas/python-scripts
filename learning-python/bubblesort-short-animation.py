@@ -4,7 +4,7 @@ import numpy as np
 
 a_list = random.sample(range(50), 50)
 y_pos = np.arange(len(a_list))
-plt.title('Bubble Sort Algorithm')
+plt.title('Bubble Sort (Short) Algorithm')
 ax = plt.bar(y_pos, a_list, align='center', color='g', edgecolor='w')
 
 swap = True

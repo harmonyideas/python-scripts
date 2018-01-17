@@ -19,7 +19,7 @@ for index in range(1,len(a_list)):
         position = position-1
     a_list[position] = currentkey
 
-# Need to change individual bars instead of clearing current axes
+# Need to change individual axes instead of clearing the current ones
     plt.clf()
     plt.scatter(a_list, y_pos, c=colors, marker='*', alpha=0.5)
     plt.pause(0.001)

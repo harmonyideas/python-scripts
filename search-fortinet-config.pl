@@ -16,10 +16,10 @@ my $sectionEnd = "end";
 my $endTag = "end\n";
 my $line = "";
 my $string = "";
-#escape harmful characters
+# escape harmful characters
 for regex
 $configObject = ~/\Q$configObject\E/;
-#allow for reading entire file into string
+# allow for reading entire file into string
 local $ / = undef;
 # open config file
 open(OF, $configFile) or die "Can't open $configFile : $!";#

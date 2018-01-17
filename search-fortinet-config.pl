@@ -15,23 +15,25 @@ my $configObject = $ARGV[1];
 my $sectionEnd = "end";
 my $endTag = "end\n";
 my $line = "";
-my $string = "";#
-escape harmful characters
+my $string = "";
+#escape harmful characters
 for regex
-$configObject = ~/\Q$configObject\E/;#
-allow
+$configObject = ~/\Q$configObject\E/;
+#allow
 for reading entire file into string
-local $ / = undef;# open config file
+local $ / = undef;
+# open config file
 open(OF, $configFile) or die "Can't open $configFile : $!";#
 loop each line searching
 for start / end tags
 while ($line = < OF > ) {
     while ($line = ~
-        /$configObject(.*?)\b$sectionEnd\b/sg)# /s . cross line boundaries {#
-        quit
-        if we reach end of file
+        /$configObject(.*?)\b$sectionEnd\b/sg)
+        # /s . cross line boundaries {
+        # quit if we reach end of file
         close OF
-        if eof;# add start and end tags to config section
+        if eof;
+        # add start and end tags to config section
         $string = $string.$configObject.$1.$endTag;
     }
 }

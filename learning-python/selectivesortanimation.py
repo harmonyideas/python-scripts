@@ -14,7 +14,7 @@ for temp_slot in range(len(a_list)-1, 0, -1):
     for position in range(1, temp_slot + 1):
         if a_list[position] > a_list[max_pos]:
             max_pos = position
-
+# Need to change to simultaneous assignment
     temp = a_list[temp_slot]
     a_list[temp_slot] = a_list[max_pos]
     a_list[max_pos] = temp

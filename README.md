@@ -1,5 +1,5 @@
 # RandomStuff
-Just some random scripts   
+This project contains a collection of short scripts I have written. 
 
 DirName      | Description
 ------------- | -------------  

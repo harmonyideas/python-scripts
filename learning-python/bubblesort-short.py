@@ -6,7 +6,5 @@ def bubblesort_short(a_list):
         for i in range(numpasses):
             if a_list[i] > a_list[i + 1]:
                 swap = True
-                temp = a_list[i]
-                a_list[i] = a_list[i + 1]
-                a_list[i + 1] = temp
+                a_list[i], a_list[i+1] = a_list[i+1], a_list[i]
         numpasses = numpasses - 1

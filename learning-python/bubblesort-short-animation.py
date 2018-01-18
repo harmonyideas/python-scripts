@@ -10,10 +10,10 @@ ax = plt.bar(y_pos, a_list, align='center', color='g', edgecolor='w')
 swap = True
 numpasses = len(a_list) - 1
 while numpasses > 0 and swap:
-    plt.pause(0.2)
     swap = False
     # Adjust individual bars to proper height of a_list[index]
     for i in range(numpasses):
+        plt.pause(0.05)
         if a_list[i] > a_list[i + 1]:
             swap = True
             ax[i].set_height(a_list[i + 1])

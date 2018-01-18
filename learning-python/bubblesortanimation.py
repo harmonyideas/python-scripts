@@ -9,8 +9,8 @@ ax = plt.bar(y_pos, a_list, align='center', color='g', edgecolor='w')
 plt.title('Bubble Sort Algorithm')
 
 for passnum in range(len(a_list), 0, -1):
-    plt.pause(.01)
     for i in range(passnum - 1):
+        plt.pause(.05)
         if a_list[i] > a_list[i + 1]:
             ax[i].set_height(a_list[i + 1])
             ax[i + 1].set_height(a_list[i])

@@ -4,7 +4,7 @@ Just some random scripts I have created over the years.
 FileName      | Description
 ------------- | -------------
 deckofcards.py | Class for deck of cards    
-fbi-stats.py   | Plot graph using MatPlotLib and FBI crime stats CSV file
+fbi-crime-stats.py   | Plot graph using MatPlotLib and FBI crime stats CSV file
 population-by-country | Plot graph using MatPlotLib and population stats CSV file
 bubblesort.py  | Simple bubble sort example 
 bubblesort_short.py  | Simple example of a bubble sort using the short method  

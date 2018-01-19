@@ -16,12 +16,11 @@ while numpasses > 0 and swap:
         plt.pause(0.1)
         if x_values[i] > x_values[i + 1]:
             swap = True
-            temp = x_values[i]
             ax[i].set_height(x_values[i + 1])
-            x_values[i] = x_values[i + 1]
-            x_values[i + 1] = temp
-            ax[i + 1].set_height(temp)
+            ax[i + 1].set_height(x_values[i])
+            x_values[i], x_values[i + 1] = x_values[i + 1], x_values[i]
     numpasses = numpasses-1
 
 # Window will close without this
 plt.show()
+

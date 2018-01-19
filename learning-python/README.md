@@ -1,7 +1,7 @@
 # RandomStuff
 Just some random scripts I have created over the years.       
 
-File Name      | Description
+Filename      | Description
 ------------- | -------------
 deckofcards.py | Class for deck of cards    
 fbi-crime-stats.py   | Plot graph using MatPlotLib and FBI crime stats CSV file

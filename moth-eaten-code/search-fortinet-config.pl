@@ -23,8 +23,7 @@ $configObject = ~/\Q$configObject\E/;
 local $ / = undef;
 # open config file
 open(OF, $configFile) or die "Can't open $configFile : $!";#
-loop each line searching
-for start / end tags
+#loop each line searching for start / end tags
 while ($line = < OF > ) {
     while ($line = ~/$configObject(.*?)\b$sectionEnd\b/sg)
     {

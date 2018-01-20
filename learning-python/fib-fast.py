@@ -1,13 +1,17 @@
+import timeit
+
+
 def fib(n):
-    
-    if n < 2:
-        return n
+    i = 0
+    first=0
+    last = 1
 
-    first, last = 1, 0
-
-    for i in (xrange(n)):
+    while i < n:
+        yield last
         first, last = last, first + last
-    return last
+        i += 1
+
+for x in fib(10): 
+    print(x)
 
 
-print fib(10)

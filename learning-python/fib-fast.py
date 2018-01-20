@@ -1,6 +1,3 @@
-import timeit
-
-
 def fib(n):
     i = 0
     first=0
@@ -11,7 +8,9 @@ def fib(n):
         first, last = last, first + last
         i += 1
 
-for x in fib(10): 
+
+for x in fib(100):
     print(x)
+
 
 

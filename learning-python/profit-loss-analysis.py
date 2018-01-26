@@ -13,11 +13,9 @@ revenue = [(80 * x) for x in range(100, 600, 100)]
 
 z1 = np.array(y_values)
 
-
 ax.plot(x_values, y_values, color='r')
 ax.fill_between(x_values, revenue, y_values,
                 where=z1 < revenue, color='g', alpha=0.5, interpolate=True)
-
 
 ax.plot(x_values, revenue, color='g')
 ax.fill_between(x_values, revenue, y_values,
@@ -25,8 +23,7 @@ ax.fill_between(x_values, revenue, y_values,
 
 # R(x) = C(x)
 ax.annotate('Break even', xy=(166.66, 13333), xytext=(95, 20000),
-            arrowprops=dict(facecolor='black', shrink=0.05),
-            )
+            arrowprops=dict(facecolor='black', shrink=0.05),)
 
 red_patch = mpatches.Patch(color='red', label='Loss')
 green_patch = mpatches.Patch(color='green', label='Gain')

@@ -41,6 +41,7 @@ class MyDictionary(object):
                     response = e.message
             return jsonify(response), 200
 
+        
 # Instantiate our Node
 app = Flask(__name__)
 

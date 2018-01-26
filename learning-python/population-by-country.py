@@ -14,8 +14,3 @@ plt.title('Population of North America')
 plt.ylabel('Population')
 plt.xlabel('Year')
 plt.show()
-
-
-
-
-

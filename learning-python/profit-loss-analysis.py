@@ -13,7 +13,6 @@ revenue = [(80 * x) for x in range(100, 600, 100)]
 
 z1 = np.array(y_values)
 
-
 ax1 = fig.add_subplot(111)
 ax1.plot(x_values, y_values, color='r')
 ax1.fill_between(x_values, revenue, y_values,

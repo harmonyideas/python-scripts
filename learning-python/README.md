@@ -20,6 +20,7 @@ fib-faster | Fibonnaci Sequence using simple loop
 flashcards.py    | Simple app for math problems using the python cli 
 hashtable.py   |  Rudimentary hash table using Dan Bernstein's dbj2 hash algorithm  
 profit-loss-analysis.py | Plot a simple profit and loss analysis graph
+temp-conversion.py | Exercise 1-3 from "The C Programming Language"
 transposematrix.py | Transpose a given matrix - list of lists
 tictactoe.py  | TicTacToe game with a very easy opponent
 

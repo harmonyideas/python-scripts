@@ -44,7 +44,6 @@ class MyDictionary(object):
 # Instantiate our Node
 app = Flask(__name__)
 
-
 dictionary = MyDictionary()
 
 if __name__ == '__main__':

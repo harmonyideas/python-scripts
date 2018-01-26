@@ -9,4 +9,5 @@ for number in integer_list:
 
 top_integers = sorted(integer_counter, key=integer_counter.get, reverse=True)
 
+
 print top_integers[:1]

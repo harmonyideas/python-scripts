@@ -4,4 +4,5 @@ def transpose_matrix(matrix):
             matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
     return matrix
 
+
 print(transpose_matrix([[1, 0, 1], [1, 0, 1], [1, 0, 1]]))

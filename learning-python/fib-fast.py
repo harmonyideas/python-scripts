@@ -8,9 +8,5 @@ def fib(n):
         first, last = last, first + last
         i += 1
 
-
 for x in fib(100):
     print(x)
-
-
-

@@ -5,6 +5,7 @@ import numpy as np
 plt.style.use(['ggplot'])
 fig, (ax) = plt.subplots()
 
+# Widgets Produced
 x_values = [x for x in range(100, 600, 100)]
 # C(x) = (variable costs) + (fixed costs) = 20x + 10000
 y_values = [((20 * x) + 10000) for x in range(100, 600, 100)]

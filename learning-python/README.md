@@ -6,7 +6,7 @@ Filename      | Description
 deckofcards.py | Class for deck of cards
 fbi-crime-stats.py   | Plot graph using MatPlotLib and FBI crime stats CSV file
 population-by-country | Plot graph using MatPlotLib and population stats CSV file
-profit-loss-analysis.py | Plot a simple profit and loss analysis graph
+profit-loss-analysis.py | Plot a simple profit and loss analysis graph using MatPlotLib
 bubblesort.py  | Simple bubble sort example 
 bubblesort_short.py  | Simple example of a bubble sort using the short method  
 bubblesortanimation.py  | Dynamic animation of a bubble sort algorithm using matplotlib and bar graph. 

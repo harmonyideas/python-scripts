@@ -1,5 +1,5 @@
 # RandomStuff
-Just some random scripts     
+Just some random scripts I have created over the years.       
 
 FileName      | Description
 ------------- | -------------

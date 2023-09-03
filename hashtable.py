@@ -1,25 +1,32 @@
-my_table = ['Empty'] * 100
+class MyHashTable(object):
+    def __init__(self, size):
+        self.my_table = ['Empty'] * size
+        self.size = size
 
-def djb2_hash(s):
-    hash = 0
-    for x in str(s):
-        hash = ((hash * 33) ^ ord(x)) % 100
-    print hash
-    return hash
+    def djb2_hash(self, s):
+        hash = 0
+        for x in str(s):
+            hash = ((hash * 33) ^ ord(x))
+        return hash
+
+    def insert(self, key, data):
+        key = (self.djb2_hash(key)) % self.size
+        self.my_table[(key)] = data
+
+    def getitem(self, key):
+        key = self.djb2_hash(key) % self.size
+        return self.my_table[key]
+
+    def delete(self, key):
+            key = self.djb2_hash(key) % self.size
+            self.my_table[(key)] = 'Empty'
 
 
-def insert(key,data):
-    key = djb2_hash(key)
-    my_table[(key)] = data
-
-
-def getitem(key):
-    key = djb2_hash(key)
-    return my_table[key]
-
-
-insert('Ping','Pong')
-print getitem('Ping')
+hash_table = MyHashTable(100)
+hash_table.insert('Ping', 'Pong')
+print hash_table.getitem('Ping')
+hash_table.delete('Ping')
+print hash_table.my_table
 
 
 

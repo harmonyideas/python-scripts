@@ -3,20 +3,22 @@ import random
 import numpy as np
 
 plt.style.use(['ggplot'])
-a_list = random.sample(range(50), 50)
-y_pos = np.arange(len(a_list))
-ax = plt.bar(y_pos, a_list, align='center', color='g', edgecolor='w')
+x_values = random.sample(range(50), 50)
+y_values = np.arange(len(x_values))
+ax = plt.bar(y_values, x_values, align='center', color='g', edgecolor='w')
 plt.title('Bubble Sort Algorithm')
 
-for passnum in range(len(a_list), 0, -1):
-    for i in range(passnum - 1):
-        plt.pause(.05)
-        if a_list[i] > a_list[i + 1]:
-            ax[i].set_height(a_list[i + 1])
-            ax[i + 1].set_height(a_list[i])
-            a_list[i], a_list[i+1] = a_list[i+1], a_list[i]
+for numpasses in range(len(x_values), 0, -1):
+    for i in range(numpasses - 1):
+        plt.pause(.01)
+        if x_values[i] > x_values[i + 1]:
+            ax[i].set_height(x_values[i + 1])
+            ax[i + 1].set_height(x_values[i])
+            x_values[i], x_values[i + 1] = x_values[i + 1], x_values[i]
 
 # Window will close without this - need to fix and update individual bars instead
 plt.show()
+
+
 
 

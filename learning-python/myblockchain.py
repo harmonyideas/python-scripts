@@ -29,9 +29,7 @@ class MyBlockChain(object):
 
         # Reset the current list of transactions
         self.current_transactions = []
-
         self.chain.append(block)
-
         return block
 
     def proof_of_work(self, last_proof):

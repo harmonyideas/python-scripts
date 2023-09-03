@@ -2,28 +2,27 @@ import matplotlib.pyplot as plt
 import random
 import numpy as np
 
-fig = plt.gcf()
-fig.show()
-
+# create initial plot with blank bars
 x_values = random.sample(range(25), 25)
 y_values = np.arange(len(x_values))
+fig, ax = plt.subplots()
+rects = ax.bar(y_values, np.zeros(len(x_values)), align='center', color='g', edgecolor='w')
 plt.title('Bubble Sort Algorithm')
-ax = plt.bar(y_values, x_values, align='center', color='g', edgecolor='w')
+plt.ylim([0, max(x_values)])
 
+# perform bubble sort and update plot
 swap = True
 numpasses = len(x_values) - 1
 while numpasses > 0 and swap:
     swap = False
-    # Adjust individual graph bars to proper height
     for i in range(numpasses):
-        fig.canvas.draw()
         if x_values[i] > x_values[i + 1]:
             swap = True
-            ax[i].set_height(x_values[i + 1])
-            ax[i + 1].set_height(x_values[i])
             x_values[i], x_values[i + 1] = x_values[i + 1], x_values[i]
+            rects[i].set_height(x_values[i])
+            rects[i + 1].set_height(x_values[i + 1])
+            fig.canvas.draw_idle()
+            plt.pause(.1)
     numpasses = numpasses - 1
-    plt.pause(.1)
 
-# Window will close without this
-plt.show(block=True)
+plt.show()

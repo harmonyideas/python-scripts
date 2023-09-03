@@ -2,8 +2,6 @@ import csv
 import matplotlib.pyplot as plt
 from collections import Counter
 
-a_list = []
-
 with open('tweets.csv') as csvfile:
     fieldnames = ['status_id',
                   'created_at',
@@ -12,14 +10,12 @@ with open('tweets.csv') as csvfile:
                   'text']
 
     stats = csv.DictReader(csvfile, delimiter=',', quotechar='"', fieldnames=fieldnames)
-    stats.next()
+    next(stats)
 
-    for row in stats:
-        a_list.append((row['created_at'][11:13]))
+    a_list = [row['created_at'][11:13] for row in stats]
 
 values = Counter(a_list)
-x_values = values.keys()
-y_values = values.values()
+x_values, y_values = zip(*values.items())
 
 plt.style.use(['ggplot'])
 ax = plt.bar(x_values, y_values, color='r')

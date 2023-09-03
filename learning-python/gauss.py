@@ -7,5 +7,5 @@ def sum_numbers(num_seq):
     return s
 
 
-my_num_seq = [i for i in range(1, 101)]
+my_num_seq = list(range(1, 101))
 print(sum_numbers(my_num_seq))

@@ -19,7 +19,7 @@ for temp_slot in range(len(a_list)-1, 0, -1):
     a_list[temp_slot] = a_list[max_pos]
     a_list[max_pos] = temp
 
-    # Need to change individual bars instead of clearing current axes
+    # Need to change individual axes instead of clearing the current ones
     plt.clf()
     plt.scatter(a_list, y_pos, c=colors, alpha=0.5)
     plt.pause(0.001)

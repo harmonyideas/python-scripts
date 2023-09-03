@@ -11,7 +11,7 @@ swap = True
 numpasses = len(x_values) - 1
 while numpasses > 0 and swap:
     swap = False
-    # Adjust individual bars to proper height of a_list[index]
+    # Adjust individual graph bars to proper height 
     for i in range(numpasses):
         plt.pause(0.1)
         if x_values[i] > x_values[i + 1]:

@@ -3,7 +3,7 @@ import os
 from flask import Flask, jsonify, request, render_template
 
 
-class MyDictionary(object):
+class MyDictionary():
     def __init__(self):
         self.english_words = []
         # Load the word list

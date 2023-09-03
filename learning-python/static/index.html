@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" /></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<form id="dictionary" style="display:inline;">
 		<input id="search_word" name="search" size="40" type="text" placeholder="Search"/>
@@ -25,7 +25,7 @@
 			$("#server-results").html('');
 			var s_word = $("input#search_word").val();
 		                // jQuery cross domain ajax
-		                $.post("http://172.16.0.225:5000/search", { search_word: s_word }, function(data) {
+		                $.post("http://localhost:5000/search", { search_word: s_word }, function(data) {
 		                	$("<p>" + data + "</p>").appendTo('#server-results');
 		                });
 		            }

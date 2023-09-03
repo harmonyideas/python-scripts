@@ -19,24 +19,22 @@ my $string = "";
 #escape harmful characters
 for regex
 $configObject = ~/\Q$configObject\E/;
-#allow
-for reading entire file into string
+#allow for reading entire file into string
 local $ / = undef;
 # open config file
 open(OF, $configFile) or die "Can't open $configFile : $!";#
 loop each line searching
 for start / end tags
 while ($line = < OF > ) {
-    while ($line = ~
-        /$configObject(.*?)\b$sectionEnd\b/sg)
-        # /s . cross line boundaries {
-        # quit if we reach end of file
-        close OF
-        if eof;
+    while ($line = ~/$configObject(.*?)\b$sectionEnd\b/sg)
+    {
+        # /s . cross line boundaries quit if we reach end of file
+        close OF if eof;
         # add start and end tags to config section
         $string = $string.$configObject.$1.$endTag;
     }
 }
-close(OF);# remove leading whitespace and print string
+close(OF);
+# remove leading whitespace and print string
 $string = ~s / \h + / /g;
 printf($string);

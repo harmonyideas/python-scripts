@@ -1,8 +1,6 @@
 import timeit
 
-
 def fib(n, index = {0: 0, 1: 1}):
-
     if n < 2:
         return n
 
@@ -10,7 +8,5 @@ def fib(n, index = {0: 0, 1: 1}):
         index[n] = fib(n - 1, index) + fib(n - 2, index)
     return index[n]
 
-
 timer = timeit.Timer(stmt='print fib(1)', setup="from __main__ import fib")
 print timer.timeit(number=1)
-

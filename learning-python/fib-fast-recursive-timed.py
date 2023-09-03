@@ -9,4 +9,4 @@ def fib(n, index = {0: 0, 1: 1}):
     return index[n]
 
 timer = timeit.Timer(stmt='fib(1)', setup="from __main__ import fib")
-print timer.timeit(number=1)
+print(timer.timeit(number=1))

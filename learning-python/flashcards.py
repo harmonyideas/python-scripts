@@ -1,7 +1,7 @@
 import random
 
 
-class FlashCards(object):
+class FlashCards():
     def __init__(self):
         self.value = range(0, 10)
 

@@ -1,5 +1,5 @@
 # RandomStuff
-Just some random scripts I have created.       
+Just some random scripts I have created to help new users learn the basics of Python.        
 
 Filename      | Description
 ------------- | -------------

@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 from collections import Counter
-import numpy as np
+
 
 a_list = []
 

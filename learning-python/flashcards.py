@@ -7,15 +7,14 @@ class FlashCards(object):
 
     def pick_random_cards(self, operation, x, y):
         result = {
-            'M': lambda x,y: x * y,
-            'D': lambda x,y: x / y,
-            'A': lambda x,y: x + y,
-            'S': lambda x,y: x - y,
-        }[operation](x, y)
-        return result
+            'M': lambda x, y: x * y,
+            'D': lambda x, y: x / y,
+            'A': lambda x, y: x + y,
+            'S': lambda x, y: x - y,
+        }
+        return result[operation](x, y)
 
     def show_flashcard(self, operand):
-
         operand_symbols = {
             'M': "*",
             'D': "/",
@@ -24,19 +23,17 @@ class FlashCards(object):
         }[operand]
 
         while True:
-            x = random.choice(FlashCards().value)
-            y = random.choice(FlashCards().value)
+            x = random.choice(self.value)
+            y = random.choice(self.value)
             problem = "%d %s %d = " % (x, operand_symbols, y)
-            answer = (FlashCards().pick_random_cards(operand, x, y))
-            user_answer = raw_input(problem)
+            answer = self.pick_random_cards(operand, x, y)
+            user_answer = input(problem)
 
             if user_answer == str(answer):
-                print ("You are correct!\n")
+                print("You are correct!\n")
             elif user_answer == "Q":
                 break
 
 
 myCards = FlashCards()
 myCards.show_flashcard('A')
-
-# print myCards.pick_random_cards(4)

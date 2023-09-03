@@ -2,6 +2,8 @@ import csv
 import matplotlib.pyplot as plt
 
 a_list = []
+x_values = []
+y_values = []
 
 # We should be using pandas library for this
 with open('fbi-stats.csv') as csvfile:
@@ -19,6 +21,8 @@ plt.title('FBI Violent Crime Statistics')
 plt.ylabel('Volume')
 plt.xlabel('Year')
 plt.show()
+
+
 
 
 

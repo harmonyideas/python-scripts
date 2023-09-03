@@ -17,7 +17,6 @@ for passnum in range(len(a_list), 0, -1):
             temp = a_list[i]
             a_list[i] = a_list[i + 1]
             a_list[i + 1] = temp
-    plt.xticks(a_list, y_pos)
     plt.draw()
     plt.pause(.01)
     # time.sleep(0.001)

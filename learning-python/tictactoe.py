@@ -6,6 +6,7 @@ import random
 
 
 class TicTacToe(wx.Frame):
+    counter = 0
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     scale = {'width': 90, 'height': 90}
     moves = [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -14,13 +15,27 @@ class TicTacToe(wx.Frame):
 
         super(TicTacToe, self).__init__(parent, title=title,
                                         size=(400, 400))
+        self.panel = wx.Panel(self)
         self.InitUI()
 
     def InitUI(self):
+        vbox = wx.BoxSizer(wx.VERTICAL)
+
+        hbox1 = wx.BoxSizer(wx.HORIZONTAL)
+        self.l1 = wx.StaticText(
+            self.panel, -1, "Please select a move [0-8]", pos=(3, 325))
+
+        hbox1.Add(self.l1, 1, wx.EXPAND | wx.ALIGN_LEFT | wx.ALL, 5)
+        self.t1 = wx.TextCtrl(self.panel, pos=(165, 320),
+                              size=(50, 25), style=wx.TE_PROCESS_ENTER)
+
+        hbox1.Add(self.t1, 1, wx.EXPAND | wx.ALIGN_LEFT | wx.ALL, 5)
+        vbox.Add(hbox1)
+
         self.Bind(wx.EVT_PAINT, self.OnPaint)
+        self.t1.Bind(wx.EVT_TEXT_ENTER, self.OnEnterPressed)
         self.Centre()
         self.Show()
-        self.playgame()
 
     def OnPaint(self, e):
         dc = wx.ClientDC(self)
@@ -42,34 +57,45 @@ class TicTacToe(wx.Frame):
         forecolor = (153, 0, 0)
         dc.SetTextForeground(forecolor)
 
-    def dlgquestion(self, parent=None, message='', default_value='Test'):
-        dlg = wx.TextEntryDialog(
-            parent, message, style=wx.OK, pos=wx.Point(0, 0))
-        dlg.ShowModal()
-        result = dlg.GetValue()
-        dlg.Destroy()
-        return result
+    def OnEnterPressed(self, e):
+        pos = self.t1.GetValue()
+        if pos.lower() == "q":
+            quit()
+
+        self.updatemoves(int(pos), "P1")
+        self.computermoves("C")
+
+        if self.checkmoves("P1"):
+            print("P1 is the Winner!")
+        elif self.checkmoves("C"):
+            print("Computer is the Winner!")
+
+        self.t1.SetValue("")
+        self.Refresh()
+        self.Update()
 
     def updatemoves(self, pos, player):
-        self.moves[pos] = player
+        if self.counter <= 8:
+            self.moves[pos] = player
+            self.counter += 1
+        else:
+            print("Out of moves")
 
     def findmoves(self):
         cpumoves = []
         for x in range(9):
             if self.moves[x] == int(x):
                 cpumoves.insert(x, x)
-        if len(cpumoves) == 0:
-            return -1
         return cpumoves
 
     def computermoves(self, player):
-        choice = random.choice(self.findmoves())
-        if choice == -1:
-            print("Sorry, no more moves!")
-            return -1
-        else:
+        if self.counter < 8:
+            choice = random.choice(self.findmoves())
             self.moves[choice] = player
-            return 0
+            self.counter += 1
+        else:
+            print("Out of moves")
+        return 0
 
     def checkmoves(self, le):
         return ((self.moves[0] == le and self.moves[1] == le and self.moves[2] == le) or  # across the top
@@ -87,28 +113,8 @@ class TicTacToe(wx.Frame):
                 (self.moves[2] == le and self.moves[4] == le and self.moves[6] == le) or
                 (self.moves[0] == le and self.moves[4] == le and self.moves[8] == le))  # diagonal
 
-    def playgame(self):
-        answer = self.dlgquestion(
-            message="Enter \"Y\" to go first or enter to skip")
-        if (answer) != "Y":
-            self.computermoves("C")
-
-        while True:
-            pos = self.dlgquestion(message='Please select a move')
-            if pos == "Q":
-                quit()
-            self.updatemoves(int(pos), "P1")
-            if self.checkmoves("P1"):
-                print("P1 is the Winner!")
-                break
-            if (self.computermoves("C") == -1):
-                break
-            if self.checkmoves("C"):
-                print("Computer is the Winner!")
-                break
-
 
 if __name__ == '__main__':
     app = wx.App()
-    TicTacToe(None, 'Line')
+    TicTacToe(None, 'TicTacToe')
     app.MainLoop()

@@ -22,7 +22,7 @@ ax.plot(x_values, revenue, color='g')
 ax.fill_between(x_values, revenue, y_values,
                 where=z1 > revenue, color='r', alpha=0.5, interpolate=True)
 
-# R(x) = C(x)
+# R(x) = C(x) (total reveue = total costs)
 ax.annotate('Break even', xy=(166.66, 13333), xytext=(95, 20000),
             arrowprops=dict(facecolor='black', shrink=0.05),)
 

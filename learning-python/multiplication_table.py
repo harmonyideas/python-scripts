@@ -12,9 +12,8 @@ def multiplication_table():
     for r in rows:
         print("\n" + "[" + str(r) + "]"),
         for c in cols:
-            print ("\t" + str(r * c)),
-        print ("\n")
-
-
+            print("\t" + str(r * c)),
+        print("\n")
+        
 multiplication_table()
 

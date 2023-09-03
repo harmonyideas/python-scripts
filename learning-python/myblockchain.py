@@ -5,7 +5,7 @@ from uuid import uuid4
 from flask import Flask, jsonify, request
 
 
-class MyBlockChain(object):
+class MyBlockChain():
     def __init__(self):
         self.chain = []
         self.current_transactions = []

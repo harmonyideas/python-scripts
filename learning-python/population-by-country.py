@@ -15,7 +15,6 @@ with open('populationbycountry19802010millions.csv', 'rU') as csvfile:
             for v in x_values:
                 y_values.append(row[(v)])
 
-
 plt.style.use(['ggplot'])
 ax = plt.plot(x_values[1:], y_values[1:])
 plt.title('Population of North America')

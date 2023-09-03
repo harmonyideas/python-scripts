@@ -14,9 +14,10 @@ fig.show()
 for numpasses in range(len(x_values), 0, -1):
     for i in range(numpasses - 1):
         fig.canvas.draw()
+
         if x_values[i] > x_values[i + 1]:
             ax[i].set_height(x_values[i + 1])
             ax[i + 1].set_height(x_values[i])
             x_values[i], x_values[i + 1] = x_values[i + 1], x_values[i]
-            
+    plt.pause(.1)       
 plt.show()

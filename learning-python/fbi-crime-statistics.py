@@ -21,12 +21,3 @@ plt.title('FBI Violent Crime Statistics')
 plt.ylabel('Volume')
 plt.xlabel('Year')
 plt.show()
-
-
-
-
-
-
-
-
-

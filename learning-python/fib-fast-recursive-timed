@@ -1,14 +1,18 @@
 import timeit
 
 
-def fib(n, index = {0: 0, 1: 1}):
-    if n < 2:
-        return n
-        
-    if n not in index:
-        index[n] = fib(n - 1, index) + fib(n - 2, index)
-    return index[n]
+def fib(n):
+    i = 0
+    first=0
+    last = 1
+
+    while i < n:
+        yield last
+        first, last = last, first + last
+        i += 1
 
 
-timer = timeit.Timer(stmt='print fib(500)', setup="from __main__ import fib")
+timer = timeit.Timer(stmt='for x in fib(10): print(x)', setup="from __main__ import fib")
 print timer.timeit(number=1)
+
+

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Gauss forumula for summing a sequence of numbers
+# Gauss forumula for finding the sum of a sequence of numbers
 
 def sum_numbers(num_seq):
     s = num_seq[-1]*(num_seq[0] + num_seq[-1])/2

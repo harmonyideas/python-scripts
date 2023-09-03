@@ -38,7 +38,8 @@ def api_pingtest():
                 response = ('Invalid domain name or IP address!')
         except subprocess.CalledProcessError:
             response = ('Unexpected Error.')
-    return json.dumps(str(response))
+    
+    return json.dumps(response.encode('utf-8'))
 
 
 @app.route('/whoisTest', methods=['POST', 'GET'])
@@ -55,11 +56,12 @@ def api_whoistest():
         except:
             response = "Unexpected Error"
 
-    return json.dumps(str(response))
+    return json.dumps(response.encode('utf-8'))
 
 
 @app.route('/dnsTest', methods=['POST', 'GET'])
 def api_dnstest():
+    response = ""
     if request.method == "POST":
 	host = request.form['host']
         try:
@@ -93,7 +95,7 @@ def api_mtrtest():
         except subprocess.CalledProcessError:
             response = ('Unexpected Failure.')
 
-    return json.dumps(str(response))
+    return json.dumps(response.encode('utf-8'))
 
 
 @app.route('/subnetcalcTest', methods=['POST', 'GET'])
@@ -113,7 +115,7 @@ def api_subnetcalctest():
         except subprocess.CalledProcessError:
             response = ('Unexpected Failure')
 
-    return json.dumps(str(response))
+    return json.dumps(response.encode('utf-8'))
 
 
 if __name__ == "__main__":

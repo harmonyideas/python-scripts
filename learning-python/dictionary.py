@@ -13,10 +13,10 @@ class MyDictionary():
     def load_words(self):
         try:
             filepath = os.path.abspath(__file__)
-            with open(os.path.join(os.path.dirname(filepath), 'dictionary.json')) as f:
+            with open(os.path.join(os.path.dirname(filepath), 'dictionary.json', encoding='utf-8')) as f:
                 return json.load(f)
         except OSError as e:
-          print "Could not open/read file:", fname
+          print("Could not open/read file:", fname)
           return str(e)
 
     def add_routes(self):

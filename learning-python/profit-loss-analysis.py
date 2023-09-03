@@ -9,7 +9,7 @@ fig, (ax) = plt.subplots()
 x_values = [x for x in range(100, 600, 100)]
 # C(x) = (variable costs) + (fixed costs) = 20x + 10000
 y_values = [((20 * x) + 10000) for x in range(100, 600, 100)]
-# R(x) = (widgets * price) = $80/widget
+# R(x) = (widgets * price)  $80/widget
 revenue = [(80 * x) for x in range(100, 600, 100)]
 
 z1 = np.array(y_values)

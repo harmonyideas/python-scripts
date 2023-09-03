@@ -1,4 +1,4 @@
-# This example should be recognized from the book "The C Programming Language" EX. 1-4
+# This example is copied from the book "The C Programming Language" EX. 1-4
 # Author: Brian W. Kernighan, Dennis M. Ritchie
 
 

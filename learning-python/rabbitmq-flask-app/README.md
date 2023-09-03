@@ -1,4 +1,4 @@
-# Simple rabbitMQ docker application using Python's Flask module 
+# Demonstration for rabbitMQ docker application using Python's Flask module 
 
 Filename      | Description
 ------------- | -------------

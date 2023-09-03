@@ -15,8 +15,8 @@ class MyCards():
     def join(self, iterable, sep=' '):
         return sep.join(map(str, iterable))
 
-    def card_combinations(self, cards, num):
-        return {self.join(combos) for combos in itertools.combinations(cards, num)}
+    def card_combinations(self, mycards, num):
+        return {self.join(combos) for combos in itertools.combinations(mycards, num)}
 
     def pick_random_cards(self, count):
         return random.sample(self.deck, abs(count))

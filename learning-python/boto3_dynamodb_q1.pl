@@ -1,7 +1,7 @@
 from __future__ import print_function # Python 2/3 compatibility
 import boto3
-import json
 import decimal
+import json
 from boto3.dynamodb.conditions import Key, Attr
 
 # Helper class to convert a DynamoDB item to JSON.
@@ -18,7 +18,7 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-2', endpoint_url="htt
 
 table = dynamodb.Table('Legislators')
 
-# Search for all legislators who are female 
+# Search for all legislators who are female
 response = table.scan(
     FilterExpression=Attr('bio.gender').contains('F')
     )

@@ -1,5 +1,6 @@
 import random
 
+
 def bubblesort_short(a_list):
     for numpasses in range(len(a_list) - 1, 0, -1):
         swap = False
@@ -10,6 +11,7 @@ def bubblesort_short(a_list):
         if not swap:
             break
     return a_list
+
 
 my_list = random.sample(range(100), 100)
 print(bubblesort_short(my_list))

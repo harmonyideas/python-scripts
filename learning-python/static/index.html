@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Search Box</title>
-
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-
+    <meta charset="UTF-8">
+    <title>Search Box</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
 </head>
 
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<form id="dictionary" style="display:inline;">
-		<input id="search_word" name="search" size="40" type="text" placeholder="Search"/>
-		<input type="button" onclick="submitForm();" id="search-word-btn" value="Go"/>
-		<div id="server-results">
-			<!-- For server results -->
-		</div>
-	</form>
-
-	<script>
-		function submitForm() {
-			$("#server-results").html('');
-			var s_word = $("input#search_word").val();
-		                // jQuery cross domain ajax
-		                $.post("http://localhost:5000/search", { search_word: s_word }, function(data) {
-		                	$("<p>" + data + "</p>").appendTo('#server-results');
-		                });
-		            }
-     	</script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <form id="dictionary" style="display:inline;">
+        <input id="search_word" name="search" size="40" type="text" placeholder="Search" />
+        <input type="button" onclick="submitForm();" id="search-word-btn" value="Go" />
+        <div id="server-results">
+            <!-- For server results -->
+        </div>
+    </form>
+    <script>
+    function submitForm() {
+        $("#server-results").html('');
+        var s_word = $("input#search_word").val();
+        // jQuery cross domain ajax
+        $.post("http://localhost:5000/search", { search_word: s_word }, function(data) {
+            $("<p>" + data + "</p>").appendTo('#server-results');
+        });
+    }
+    </script>
 </body>
 
 </html>

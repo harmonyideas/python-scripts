@@ -3,7 +3,7 @@ import random
 import numpy as np
 
 plt.style.use(['ggplot'])
-x_values = random.sample(range(50), 50)
+x_values = random.sample(range(25), 25)
 y_values = np.arange(len(x_values))
 ax = plt.bar(y_values, x_values, align='center', color='g', edgecolor='w')
 plt.title('Bubble Sort Algorithm')

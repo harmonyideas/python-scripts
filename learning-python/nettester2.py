@@ -29,28 +29,29 @@ def is_valid_ip_cidr(ipaddress: str) -> bool:
 def api_pingtest() -> str:
     host = request.get_json()['host']
     if is_valid_domain(host) or is_valid_ip(host):
-        try:
-            response = subprocess.check_output(
-                ['ping', '-c', '3', host],
-                stderr=subprocess.STDOUT,  # get all output
-                universal_newlines=True,  # return string not bytes
-            )
-        except subprocess.CalledProcessError as e:
+      try:
+        response = subprocess.check_output(
+        ['ping', '-c', '3', host],
+        stderr=subprocess.STDOUT,  # get all output
+        universal_newlines=True,  # return string not bytes
+        )
+      except subprocess.CalledProcessError as e:
             response = f'Error: {e.output}'
-    else:
+      else:
         response = 'Invalid domain name or IP address!'
-    return json.dumps(response)
+      
+      return json.dumps(response)
 
 
 @app.route('/whoisTest', methods=['POST'])
 def api_whoistest() -> str:
     host = request.get_json()['host']
     if is_valid_domain(host) or is_valid_ip(host):
-        try:
-            domain = whois.whois(host)
-            response = domain.text
-        except Exception as e:
-            response = f'Error: {e}'
+      try:
+        domain = whois.whois(host)
+        response = domain.text
+      except Exception as e:
+        response = f'Error: {e}'
     else:
         response = 'Invalid domain name or IP address!'
     return json.dumps(response)
@@ -60,12 +61,12 @@ def api_whoistest() -> str:
 def api_dnstest() -> str:
     host = request.get_json()['host']
     if is_valid_domain(host) or is_valid_ip(host):
-        try:
-            collection = []
-            name_server = '8.8.8.8'
-            query = dns.message.make_query(host, dns.rdatatype.ANY)
-            response = dns.query.udp(query, name_server)
-        except Exception as e:
+      try:
+        collection = []
+        name_server = '8.8.8.8'
+        query = dns.message.make_query(host, dns.rdatatype.ANY)
+        response = dns.query.udp(query, name_server)
+      except Exception as e:
             response = f'Error: {traceback.format_exc()}'
     else:
         response = 'Invalid domain name or IP address!'
@@ -76,14 +77,14 @@ def api_dnstest() -> str:
 def api_mtrtest() -> str:
     host = request.get_json()['host']
     if is_valid_domain(host) or is_valid_ip(host):
-        try:
-            response = subprocess.check_output(
-                ['mtr', '-rw', host],
-                stderr=subprocess.STDOUT,  # get all output
-                universal_newlines=True,  # return string not bytes
-            )
-        except subprocess.CalledProcessError as e:
-            response = f'Error: {e.output}'
+      try:
+        response = subprocess.check_output(
+          ['mtr', '-rw', host],
+          stderr=subprocess.STDOUT,  # get all output
+          universal_newlines=True,  # return string not bytes
+        )
+      except subprocess.CalledProcessError as e:
+          response = f'Error: {e.output}'
     else:
         response = 'Invalid domain name or IP address!'
     return json.dumps(response)
@@ -94,15 +95,15 @@ def api_subnetcalctest() -> str:
     host = request.get_json()['host']
     if is_valid_ip_cidr(host):
         try:
-            response = subprocess.check_output(
-                ['sipcalc', host],
-                stderr=subprocess.STDOUT,  # get all output
-                universal_newlines=True  # return string not bytes
-                )
+          response = subprocess.check_output(
+ 	    ['sipcalc', host],
+            stderr=subprocess.STDOUT,  # get all output
+            universal_newlines=True  # return string not bytes
+          )
 	except subprocess.CalledProcessError as e:
-            response = f'Error: {e.output}'
+          response = f'Error: {e.output}'
     else:		
-        response = ('Invalid CIDR address!')        
+      response = ('Invalid CIDR address!')        
     return json.dumps(response)
 
 if __name__ == "__main__":

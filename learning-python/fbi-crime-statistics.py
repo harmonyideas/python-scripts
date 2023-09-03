@@ -1,22 +1,17 @@
-import csv
+import pandas as pd
 import matplotlib.pyplot as plt
 
-a_list = []
-x_values = []
-y_values = []
+# Read CSV file into a DataFrame
+df = pd.read_csv('static/fbi-stats.csv', delimiter=',', quotechar='"')
 
-# We should be using pandas library for this
-with open('static/fbi-stats.csv') as csvfile:
-    stats = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+# Extract relevant columns and clean data
+df = df[['Year', 'Violent\ncrime']]
+df = df.rename(columns={'Violent\ncrime': 'Violent Crime'})
+df['Year'] = pd.to_datetime(df['Year'], format='%Y')
 
-    for row in stats:
-        a_list.append((row['Year'][0:4], row['Violent\ncrime'].replace(",", "")))
-
-x_values = [x[0] for x in a_list]
-y_values = [y[1] for y in a_list]
-
+# Plot data using pandas built-in functions
 plt.style.use(['ggplot'])
-ax = plt.plot(x_values, y_values, color='r')
+df.plot(x='Year', y='Violent Crime', color='r')
 plt.title('FBI Violent Crime Statistics')
 plt.ylabel('Volume')
 plt.xlabel('Year')

@@ -15,4 +15,4 @@ def bubblesort_short(a_list):
 
 
 a_list = random.sample(range(100), 100)
-print bubblesort_short(a_list)
+print(bubblesort_short(a_list))

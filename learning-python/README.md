@@ -23,7 +23,7 @@ hashtable.py   |  Rudimentary hash table using Dan Bernstein's dbj2 hash algorit
 temp-conversion.py | Exercise 1-3 from "The C Programming Language"
 tictactoe.py  | TicTacToe game with a very easy opponent  
 transposematrix.py | Transpose a given matrix - list of lists
-tweets-timeofday | Plot tweets by time of day using Matplotlib
+tweets-timeofday.py | Plot tweets by time of day using Matplotlib
 
 
    

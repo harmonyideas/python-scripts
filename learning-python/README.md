@@ -4,6 +4,7 @@ Just some random scripts I have created over the years.
 FileName      | Description
 ------------- | -------------
 bubblesort.py  | Simple bubble sort example 
+bubblesort_short.py  | Simple example of a bubble sort using the short method  
 bubblesortanimation.py  | Dynamic animation of a bubble sort algorithm using matplotlib and bar graph. 
 bubblesort2animation.py  | Dynamic animation of a short bubble sort algorithm using matplotlib and bar graph. 
 selectivesortanimation.py  | Dynamic animation of a selective sort algorithm using matplotlib and a scatter plot. 

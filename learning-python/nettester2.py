@@ -100,11 +100,12 @@ def api_subnetcalctest() -> str:
             stderr=subprocess.STDOUT,  # get all output
             universal_newlines=True  # return string not bytes
           )
-	except subprocess.CalledProcessError as e:
+	except:
+	  subprocess.CalledProcessError as e:
           response = 'Error: {e.output}'
-    else:		
-      response = ('Invalid CIDR address!')        
-    return json.dumps(response)
+        else:		
+          response = ('Invalid CIDR address!')        
+        return json.dumps(response)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

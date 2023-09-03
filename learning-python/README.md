@@ -8,7 +8,6 @@ bubblesortanimation.py  | Dynamic animation of a bubble sort algorithm using mat
 bubblesort2animation.py  | Dynamic animation of a short bubble sort algorithm using matplotlib and bar graph. 
 selectivesortanimation.py  | Dynamic animation of a selective sort algorithm using matplotlib and a scatter plot. 
 commoninteger.py  |   Find common integer from list.  
-databaseadapter.cs   |   C# database adapter 
 deckofcards.py | Class for deck of cards       
 fib.py     | Fibonnaci Sequence 
 flashcards.py    | Simple app for math problems using the python cli   

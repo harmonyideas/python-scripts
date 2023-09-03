@@ -21,6 +21,7 @@ reverse_string.py | Reverse a given string from input
 fib.py     | Fibonnaci Sequence using recursion  
 fib-faster | Fibonnaci Sequence using simple loop   
 flashcards.py    | Simple app for math problems using the python cli 
+hashstring.py | Simple hash function for a string
 hashtable.py   |  Rudimentary hash table using Dan Bernstein's dbj2 hash algorithm
 multiplication-table.py | Simple print out of a multiplication table
 pascals-triangle.py | Print Pascal's triangle

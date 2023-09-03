@@ -22,7 +22,7 @@ class MyCards():
         return random.sample(self.deck, abs(count))
 
     def shuffle_cards(self, repeat=1):
-        for x in range(abs(repeat)):
+        for i in range(abs(repeat)):
             random.shuffle(self.deck)
 
     def print_cards(self):

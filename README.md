@@ -1,5 +1,5 @@
 # RandomStuff
-Just some random stuff with Python
+Just some random scripts with Python and Powershell
 
 CommmonInteger.py - Find the common integer given a list  
 Fib.py - Fibonacci number generator  

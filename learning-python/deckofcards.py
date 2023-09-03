@@ -26,7 +26,6 @@ class MyCards(object):
             random.shuffle(self.deck)
 
     def print_cards(self):
-        # for x in range(len(FlashCards.deck)):
         print self.deck
 
 

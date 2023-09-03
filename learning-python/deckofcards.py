@@ -15,14 +15,14 @@ class MyCards():
     def join(self, iterable, sep=' '):
         return sep.join(map(str, iterable))
 
-    def card_combinations(self, mycards, num):
-        return {self.join(combos) for combos in itertools.combinations(mycards, num)}
+    def card_combinations(self, my_cards, num):
+        return {self.join(combos) for combos in itertools.combinations(my_cards, num)}
 
     def pick_random_cards(self, count):
         return random.sample(self.deck, abs(count))
 
     def shuffle_cards(self, repeat=1):
-        for i in range(abs(repeat)):
+        for _ in range(abs(repeat)):
             random.shuffle(self.deck)
 
     def print_cards(self):

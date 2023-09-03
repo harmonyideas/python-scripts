@@ -105,13 +105,13 @@ class TicTacToe(wx.Frame):
         return 0
 
     def checkmoves(self, le):
-      for combo in self.winning_combinations:
-        if all(self.moves[i] == le for i in combo):
-        return True
-      return False
+        for combo in self.winning_combinations:
+            if all(self.moves[i] == le for i in combo):
+                return True
+        return False
     
 if name == 'main':
-app = wx.App()
-TicTacToe(None, 'TicTacToe')
-app.MainLoop()
+  app = wx.App()
+  TicTacToe(None, 'TicTacToe')
+  app.MainLoop()
     

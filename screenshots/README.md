@@ -1,3 +1,5 @@
+# Pascal's Triangle
+![Pascal's Triangle](/screenshots/JupyterScreenshot1.png "Pascal's Triangle") 	
 
 # Bubble Sort Animation
 ![Bubble Sort Animation](/screenshots/bubblesortanimation-1.png "BubbleSort Animation")

@@ -12,11 +12,9 @@ class MyDictionary(object):
 
     def load_words(self):
         try:
-            dir = os.path.dirname(__file__)
-            filename = os.path.join(dir, 'dictionary.json')
-            with open(filename, "r") as english_dictionary:
-                valid_words = json.load(english_dictionary)
-                return valid_words
+            filepath = os.path.abspath(__file__)
+            with open(os.path.join(os.path.dirname(filepath), 'dictionary.json')) as f:
+                return json.load(f)
         except Exception as e:
             return str(e)
 
@@ -27,21 +25,15 @@ class MyDictionary(object):
 
         @app.route('/search', methods=['GET', 'POST'])
         def search():
-            response = ""
-            required = ['search_word']
-
-            if not all(k in request.form for k in required):
-                return 'Missing values in POST data', 400
-
             if request.method == "POST":
-                try:
-                    search_word = request.form['search_word'].lower()
-                    response = self.english_words[search_word]
-                except Exception as e:
-                    response = e.message
-            return jsonify(response), 200
+                search_word = request.form.get('search_word', '').lower()
+                if not search_word:
+                    return 'Missing values in POST data', 400
+                response = self.english_words.get(search_word, f'Word "{search_word}" not found')
+                return jsonify(response), 200
+            return 'Invalid request method', 405
 
-        
+
 # Instantiate our Node
 app = Flask(__name__)
 

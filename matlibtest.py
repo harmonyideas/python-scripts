@@ -22,8 +22,7 @@ import wxversion
 import wx, wx.html
 import sys
 
-aboutText = """<p>Sorry, there is no information about this program. It is
-running on version %(wxpy)s of <b>wxPython</b> and %(python)s of <b>Python</b>.
+aboutText = """<p>MatLibTest %(wxpy)s of <b>wxPython</b> and %(python)s of <b>Python</b>.
 See <a href="http://wiki.wxpython.org">wxPython Wiki</a></p>"""
 
 
@@ -135,9 +134,4 @@ if __name__ == "__main__":
     top.Show()
     app.MainLoop()
 
-  #  app = wx.PySimpleApp()
- #   fr = wx.Frame(None, title='test', size=wx.Size(800, 600))
-  #  panel = CanvasPanel(fr)
- #   panel.draw()
-  #  fr.Show()
-  #  app.MainLoop()
+

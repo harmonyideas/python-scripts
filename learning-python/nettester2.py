@@ -44,13 +44,13 @@ def api_pingtest():
 @app.route('/whoisTest', methods=['POST', 'GET'])
 def api_whoistest():
     if request.method == "POST":
-    host = request.form['host']
+        host = request.form['host']
         try:
-        if is_valid_domain(host):
+            if is_valid_domain(host):
                 domain = whois.whois(host)
                 response = domain.text
             else:
-            response = ('Invalid domain name or IP address!')
+                response = ('Invalid domain name or IP address!')
         except:
             response = "Unexpected Error"
 
@@ -60,15 +60,15 @@ def api_whoistest():
 @app.route('/dnsTest', methods=['POST', 'GET'])
 def api_dnstest():
     if request.method == "POST":
-    host = request.form['host']
+        host = request.form['host']
         try:
-        if is_valid_domain(host):
-           collection = []
-           name_server = '8.8.8.8'
-           query = dns.message.make_query(host, dns.rdatatype.ANY)
-           response = dns.query.udp(query, name_server)
-        else:
-            response = ('Invalid domain name!')
+            if is_valid_domain(host):
+                collection = []
+                name_server = '8.8.8.8'
+                query = dns.message.make_query(host, dns.rdatatype.ANY)
+                response = dns.query.udp(query, name_server)
+            else:
+                response = ('Invalid domain name!')
         except Exception as e:
             response = traceback.format_exc()
 
@@ -80,14 +80,14 @@ def api_mtrtest():
     if request.method == "POST":
         host = request.form['host']
         try:
-        if is_valid_domain(host):
+            if is_valid_domain(host):
                 response = subprocess.check_output(
-                ['mtr', '-rw', host],
-                stderr=subprocess.STDOUT,  # get all output
-                universal_newlines=True  # return string not bytes
+                    ['mtr', '-rw', host],
+                    stderr=subprocess.STDOUT,  # get all output
+                    universal_newlines=True  # return string not bytes
                 )
-        else:
-            response = ('Invalid domain name or IP address!')
+            else:
+                response = ('Invalid domain name or IP address!')
 
         except subprocess.CalledProcessError:
             response = None
@@ -100,14 +100,14 @@ def api_subnetcalctest():
     if request.method == "POST":
         host = request.form['host']
         try:
-        if is_valid_ip(host):
+            if is_valid_ip(host):
                 response = subprocess.check_output(
-                ['sipcalc', host],
-                stderr=subprocess.STDOUT,  # get all output
-                universal_newlines=True  # return string not bytes
+                    ['sipcalc', host],
+                    stderr=subprocess.STDOUT,  # get all output
+                    universal_newlines=True  # return string not bytes
                 )
-        else:
-        response = ('Invalid CIDR address!')
+            else:
+                response = ('Invalid CIDR address!')
 
         except subprocess.CalledProcessError:
             response = None
@@ -117,4 +117,3 @@ def api_subnetcalctest():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
-

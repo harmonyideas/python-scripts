@@ -1,0 +1,97 @@
+<configuration>
+	<domain_controllers>
+	    <server id="DC1">
+		  <name>DC1</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC2">
+		  <name>DC2</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC3">
+		  <name>DC3</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC4">
+		  <name>DC4</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC5">
+		  <name>DC5</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC6">
+		  <name>DC6</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC7">
+		  <name>DC7</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC8">
+		  <name>DC8</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC9">
+		  <name>DC9</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC10">
+		  <name>DC10</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC11">
+		  <name>DC11</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC12">
+		  <name>DC12</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC13">
+		  <name>DC13</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	    <server id="DC14">
+		  <name>DC14</name>
+		  <office></office>
+		  <netlogon_path></netlogon_path>
+	    </server>
+	</domain_controllers>
+	<file_paths>
+	   <office id="EX1">
+		  <source></source>
+	   </office>
+	   <office id="EX2">
+		  <source></source>
+	   </office>
+	   <office id="EX3">
+		  <source></source>
+	   </office>
+	   <office id="EX4">
+		  <source></source>
+	   </office>
+	   <office id="EX5">
+		  <source></source>
+	   </office>
+	   <office id="EX6">
+		  <source></source>
+	   </office>
+	   <office id="EX8">
+		  <source></source>
+	   </office>
+	</file_paths>
+</configuration>

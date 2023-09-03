@@ -3,6 +3,7 @@ Just some random scripts I have created to help new users learn the basics of Py
 
 Filename      | Description
 ------------- | -------------
+boto3-dynamodb-q1.pl | Simple example connecting to AWS DynamoDB and executing query using boto3.
 deckofcards.py | Class for deck of cards
 fbi-crime-stats.py   | Plot graph using MatPlotLib and FBI crime stats CSV file
 population-by-country | Plot graph using MatPlotLib and population stats CSV file

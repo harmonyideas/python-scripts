@@ -1,9 +1,7 @@
 import json
-import socket
 import subprocess
 import traceback
 from dns.resolver import dns
-from typing import Dict
 
 import iptools
 import validators

@@ -4,7 +4,6 @@ Just some random scripts with Python
 FileName      | Description
 ------------- | -------------
 CommmonInteger.py  | Find the common integer given a list
-Content Cell  | Content Cell
 Deckofcards.py  |   Very simple class for a deck of cards.  
 Flashcards.py   |   Quick example of a math flash cards game.  
 Fib.py          |   Fibonacci number generator  

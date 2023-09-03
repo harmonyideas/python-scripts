@@ -5,4 +5,4 @@ Filename      | Description
 docker-compose.yml | Docker Compose file
 server | rabbitMQ producer
 worker | rabbitMQ consumer
-contactform | web server serving contact form
+contactform | web server hosting contact form

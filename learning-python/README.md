@@ -17,6 +17,7 @@ fib-faster | Fibonnaci Sequence using simple loop
 flashcards.py    | Simple app for math problems using the python cli 
 hashtable.py   |  Rudimentary hash table using Dan Bernstein's dbj2 hash algorithm  
 nettester2.py  | Flask web service written for the Android application NetTester2
+population-by-country | Plot graph using MatPlotLib and population stats CSV file
 reverse_string.py | Reverse a given string from input  
 transposematrix.py | Transpose a given matrix - list of lists
 tictactoe.py  | TicTacToe game with a very easy opponent

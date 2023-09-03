@@ -1,5 +1,5 @@
 # RandomStuff
-Just some random scripts with Python  
+Just some random scripts   
 
 FileName      | Description
 ------------- | -------------

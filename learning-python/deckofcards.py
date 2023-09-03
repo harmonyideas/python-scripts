@@ -5,6 +5,10 @@ import itertools
 class MyCards(object):
 
     def __init__(self):
+        self.deck = []
+        self.build()
+
+    def build(self):
         self.value = ('A', '2', '3', '4', '5', '6', '7',
                       '8', '9', '10', 'J', 'Q', 'K')
         self.rank = ('cdhs')

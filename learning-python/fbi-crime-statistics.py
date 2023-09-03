@@ -6,7 +6,7 @@ x_values = []
 y_values = []
 
 # We should be using pandas library for this
-with open('fbi-stats.csv') as csvfile:
+with open('static/fbi-stats.csv') as csvfile:
     stats = csv.DictReader(csvfile, delimiter=',', quotechar='"')
 
     for row in stats:

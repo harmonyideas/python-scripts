@@ -15,9 +15,9 @@ while numpasses > 0 and swap:
     # Adjust individual bars to proper height of a_list[index]
     for i in range(numpasses):
         if a_list[i] > a_list[i + 1]:
-            ax[i].set_height(a_list[i + 1])
             swap = True
             temp = a_list[i]
+            ax[i].set_height(a_list[i + 1])
             a_list[i] = a_list[i + 1]
             a_list[i + 1] = temp
             ax[i + 1].set_height(temp)

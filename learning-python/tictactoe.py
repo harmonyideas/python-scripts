@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 import wx
 import random
 
@@ -16,6 +13,16 @@ class TicTacToe(wx.Frame):
         super(TicTacToe, self).__init__(parent, title=title,
                                         size=(400, 400))
         self.panel = wx.Panel(self)
+        
+        self.winning_combinations = ((0, 1, 2),  # across the top
+                                     (3, 4, 5),  # across the middle
+                                     (6, 7, 8),  # across the bottom
+                                     (0, 3, 6),  # down the left side
+                                     (1, 4, 7),  # down the middle
+                                     (2, 5, 8),  # down the right side
+                                     (2, 4, 6),  # diagonal
+                                     (0, 4, 8))  # diagonal
+        
         self.InitUI()
 
     def InitUI(self):
@@ -97,24 +104,14 @@ class TicTacToe(wx.Frame):
             print("Out of moves")
         return 0
 
-    def checkmoves(self, le):
-        return ((self.moves[0] == le and self.moves[1] == le and self.moves[2] == le) or  # across the top
-                # across the middle
-                (self.moves[3] == le and self.moves[4] == le and self.moves[5] == le) or
-                # across the bottom
-                (self.moves[6] == le and self.moves[7] == le and self.moves[8] == le) or
-                # down the left side
-                (self.moves[0] == le and self.moves[3] == le and self.moves[6] == le) or
-                # down the middle
-                (self.moves[1] == le and self.moves[4] == le and self.moves[7] == le) or
-                # down the right side
-                (self.moves[2] == le and self.moves[5] == le and self.moves[8] == le) or
-                # diagonal
-                (self.moves[2] == le and self.moves[4] == le and self.moves[6] == le) or
-                (self.moves[0] == le and self.moves[4] == le and self.moves[8] == le))  # diagonal
-
-
-if __name__ == '__main__':
-    app = wx.App()
-    TicTacToe(None, 'TicTacToe')
-    app.MainLoop()
+   def checkmoves(self, le):
+        for combo in self.winning_combinations:
+            if all(self.moves[i] == le for i in combo):
+                return True
+        return False
+    
+if name == 'main':
+app = wx.App()
+TicTacToe(None, 'TicTacToe')
+app.MainLoop()
+    

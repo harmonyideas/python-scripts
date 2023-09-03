@@ -1,4 +1,4 @@
-class MyHashTable(object):
+class MyHashTable():
     def __init__(self, size):
         self.my_table = ['Empty'] * size
         self.size = size

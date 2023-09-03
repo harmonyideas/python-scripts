@@ -9,13 +9,10 @@ class MyCards(object):
         self.build()
 
     def build(self):
-        self.value = ('A', '2', '3', '4', '5', '6', '7',
-                      '8', '9', '10', 'J', 'Q', 'K')
-        self.rank = ('cdhs')
-        self.deck = [(A + B) for A in self.value for B in self.rank]
+        self.deck = list(itertools.product(['A','2','3','4','5','6','7',
+        '8','9','10','J','Q','K'],['Clubs','Diamonds','Hearts','Spades']))
 
     def join(self, iterable, sep=' '):
-        """Join the items in iterable, mapping each to a string first."""
         return sep.join(map(str, iterable))
 
     def card_combinations(self, cards, n):
@@ -40,4 +37,4 @@ cards.shuffle_cards(1)
 # print(cards.card_combinations(cards.deck, 2))
 
 # 4 random cards
-# print(cards.pick_random_cards(4))
+#print(cards.pick_random_cards(4))

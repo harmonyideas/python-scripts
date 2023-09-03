@@ -20,6 +20,7 @@ fib.py     | Fibonnaci Sequence using recursion
 fib-faster | Fibonnaci Sequence using simple loop   
 flashcards.py    | Simple app for math problems using the python cli 
 hashtable.py   |  Rudimentary hash table using Dan Bernstein's dbj2 hash algorithm
+multiplication-table.py | Simple print out of a multiplication table
 squares.py  |  Square a list of numbers
 temp-conversion.py | Exercise 1-3 from "The C Programming Language"
 tictactoe.py  | TicTacToe game with a very easy opponent  

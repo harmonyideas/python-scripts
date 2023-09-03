@@ -8,4 +8,4 @@ def sum_numbers(num_seq):
 
 
 num_seq = [i for i in range(1, 101)]
-print sum_numbers(num_seq)
+print(sum_numbers(num_seq))

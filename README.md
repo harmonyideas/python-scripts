@@ -1,5 +1,5 @@
 # collection-of-code
-This project contains a collection of short scripts I have written in Python. 
+This project contains a collection of short Python scripts. 
 
 DirName      | Description
 ------------- | -------------  

@@ -22,10 +22,8 @@ for temp_slot in range(len(a_list)-1, 0, -1):
     # Need to change individual bars instead of clearing current axes
     plt.clf()
     plt.scatter(a_list, y_pos, c=colors, alpha=0.5)
-
-    plt.draw()
     plt.pause(0.001)
 
 # Window will close without this
 plt.show()
-plt.close()
+

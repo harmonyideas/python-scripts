@@ -16,11 +16,9 @@ while numpasses > 0 and swap:
     for i in range(numpasses):
         if a_list[i] > a_list[i + 1]:
             swap = True
-            temp = a_list[i]
             ax[i].set_height(a_list[i + 1])
-            a_list[i] = a_list[i + 1]
-            a_list[i + 1] = temp
-            ax[i + 1].set_height(temp)
+            ax[i + 1].set_height(a_list[i])
+            a_list[i], a_list[i+1] = a_list[i+1], a_list[i]
     numpasses = numpasses-1
 
 # Window will close without this

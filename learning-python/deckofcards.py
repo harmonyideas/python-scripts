@@ -12,7 +12,7 @@ class Cards(object):
         return random.sample(Cards.deck, abs(counter))
 
     def shuffle_cards(self, repeat=1):
-        for x in range(0, abs(repeat)):
+        for i in range(0, abs(repeat)):
             random.shuffle(Cards.deck)
 
     def print_cards(self):

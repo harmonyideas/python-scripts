@@ -12,7 +12,8 @@ insertionsortanimation.py |  Dynamic animation of a insertion sort using matplot
 dictionary.py  | Search JSON dictionary using Flask WS [Search Page - index.html provided in /templates] 
 commoninteger.py  |   Find common integer from list.  
 deckofcards.py | Class for deck of cards       
-fib.py     | Fibonnaci Sequence 
+fib.py     | Fibonnaci Sequence using recursion
+fib-faster | Fibonnaci Sequence using simple loop 
 flashcards.py    | Simple app for math problems using the python cli 
 hashtable.py   |  Rudimentary hash table using Dan Bernsteins dbj2 hash algorithm  
 nettester2.py  | Flask web service written for the Android application NetTester2

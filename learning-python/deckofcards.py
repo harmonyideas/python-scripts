@@ -27,7 +27,7 @@ class MyCards(object):
             random.shuffle(self.deck)
 
     def print_cards(self):
-        print self.deck
+        print(self.deck)
 
 
 cards = MyCards()

@@ -27,8 +27,3 @@ hash_table.insert('Ping', 'Pong')
 print hash_table.getitem('Ping')
 hash_table.delete('Ping')
 print hash_table.my_table
-
-
-
-
-

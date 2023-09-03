@@ -1,6 +1,5 @@
 import random
 
-
 def bubble_sort(a_list):
     for passnum in range(len(a_list)-1, 0, -1):
         for i in range(passnum):

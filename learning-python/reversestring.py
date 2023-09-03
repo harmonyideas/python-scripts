@@ -1,4 +1,4 @@
-str1 = raw_input('Reverse Me: ')
+str1 = ('Reverse Me')
 
 def reverse_string(string):
     return string[::-1]

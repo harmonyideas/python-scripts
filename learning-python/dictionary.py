@@ -15,8 +15,9 @@ class MyDictionary():
             filepath = os.path.abspath(__file__)
             with open(os.path.join(os.path.dirname(filepath), 'dictionary.json')) as f:
                 return json.load(f)
-        except Exception as e:
-            return str(e)
+        except OSError as e:
+          print "Could not open/read file:", fname
+          return str(e)
 
     def add_routes(self):
         @app.route('/home', methods=['GET'])

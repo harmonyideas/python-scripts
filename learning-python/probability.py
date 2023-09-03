@@ -20,8 +20,8 @@ def join(iterable, sep=' '):
 
 def combo(items, n):
     """ Input elements are unique and will be treated as such - not based on position """  
-        return {join(combos)
-                for combos in itertools.combinations(items, n)}
+    return {join(combos)
+      for combos in itertools.combinations(items, n)}
 
 
 def find(items, search, n):

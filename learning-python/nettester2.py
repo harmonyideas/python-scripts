@@ -10,7 +10,6 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-
 def is_valid_domain(domain_name: str) -> bool:
     return validators.domain(domain_name)
 

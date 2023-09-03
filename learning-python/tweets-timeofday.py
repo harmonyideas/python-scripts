@@ -2,7 +2,6 @@ import csv
 import matplotlib.pyplot as plt
 from collections import Counter
 
-
 a_list = []
 
 with open('tweets.csv') as csvfile:

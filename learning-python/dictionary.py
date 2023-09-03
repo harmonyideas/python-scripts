@@ -1,5 +1,5 @@
 import json
-import os, sys
+import os
 from flask import Flask, jsonify, request, render_template
 
 
@@ -44,7 +44,6 @@ class MyDictionary(object):
 # Instantiate our Node
 app = Flask(__name__)
 
-# Generate a unique address for this node
 
 dictionary = MyDictionary()
 

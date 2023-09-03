@@ -11,6 +11,7 @@ class MyBlockChain(object):
         self.current_transactions = []
         # Start the genesis block
         self.new_block(previous_hash='1', proof=100)
+        self.add_routes()
 
     def new_block(self, proof, previous_hash=None):
         # Create a new Block and add to current chain
@@ -54,6 +55,7 @@ class MyBlockChain(object):
         :param proof:
         :return:
         """
+
         guess = '{last_proof}{proof}'.encode().format(last_proof=last_proof,proof=proof)
         guess_hash = hashlib.sha256(guess).hexdigest()
 
@@ -96,6 +98,54 @@ class MyBlockChain(object):
         # Returns the last Block in the chain
         return self.chain[-1]
 
+    def add_routes(self):
+        @app.route('/mine', methods=['GET'])
+        def mine():
+            # Run the proof of work algorithm to get the next proof...
+            last_block = blockchain.last_block
+            last_proof = last_block['proof']
+            proof = blockchain.proof_of_work(last_proof)
+
+            blockchain.new_transaction(
+                sender="0",
+                recipient=node_identifier,
+                amount=1,
+            )
+
+            # Form the new Block by adding it to the chain
+            previous_hash = blockchain.hash(last_block)
+            block = blockchain.new_block(proof, previous_hash)
+
+            response = {
+                'message': "New Block Forged",
+                'index': block['index'],
+                'transactions': block['transactions'],
+                'proof': block['proof'],
+                'previous_hash': block['previous_hash'],
+
+            }
+            return jsonify(response), 200
+
+        @app.route('/transactions/new', methods=['POST'])
+        def new_transaction():
+            values = request.get_json()
+
+            # Check that the fields are in the POST data
+            required = ['sender', 'recipient', 'amount']
+            if not all(k in values for k in required):
+                return 'Missing values', 400
+
+            # Create a new transaction
+            index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+            response = {'message': 'Transaction will be added to Block {index}'}
+
+            return jsonify(response), 201
+
+        @app.route('/chain', methods=['GET'])
+        def full_chain(self):
+            response = {'chain': self.blockchain.chain, 'length': len(self.blockchain.chain)}
+            return jsonify(response), 200
+
 
 # Instantiate our Node
 app = Flask(__name__)
@@ -105,59 +155,6 @@ node_identifier = str(uuid4()).replace('-', '')
 
 # Instantiate the Blockchain
 blockchain = MyBlockChain()
-
-
-@app.route('/mine', methods=['GET'])
-def mine():
-    # Run the proof of work algorithm to get the next proof...
-    last_block = blockchain.last_block
-    last_proof = last_block['proof']
-    proof = blockchain.proof_of_work(last_proof)
-
-    blockchain.new_transaction(
-        sender="0",
-        recipient=node_identifier,
-        amount=1,
-        )
-
-    # Form the new Block by adding it to the chain
-    previous_hash = blockchain.hash(last_block)
-    block = blockchain.new_block(proof, previous_hash)
-
-    response = {
-            'message': "New Block Forged",
-            'index': block['index'],
-            'transactions': block['transactions'],
-            'proof': block['proof'],
-            'previous_hash' : block['previous_hash'],
-
-    }
-    return jsonify(response), 200
-
-
-@app.route('/transactions/new', methods=['POST'])
-def new_transaction():
-    values = request.get_json()
-
-    # Check that the fields are in the POST data
-    required = ['sender', 'recipient', 'amount']
-    if not all(k in values for k in required):
-        return 'Missing values', 400
-
-    # Create a new transaction
-    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
-    response = {'message': 'Transaction will be added to Block {index}'}
-
-    return jsonify(response), 201
-
-
-@app.route('/chain', methods=['GET'])
-def full_chain(self):
-    response = {
-            'chain': blockchain.chain,
-            'length': len(blockchain, chain),
-            }
-    return jsonify(response), 200
 
 
 if __name__ == '__main__':

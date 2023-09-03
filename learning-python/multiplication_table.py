@@ -7,12 +7,12 @@ def multiplication_table():
     cols = range(1, 13)
 
     for c in colheaders:
-        print("\t" + "[" + c + "]"),
+        print("\t" + "[" + c + "]")
 
     for r in rows:
-        print("\n" + "[" + str(r) + "]"),
+        print("\n" + "[" + str(r) + "]")
         for c in cols:
-            print("\t" + str(r * c)),
+            print("\t" + str(r * c))
         print("\n")
         
 multiplication_table()

@@ -23,6 +23,7 @@ while numpasses > 0 and swap:
             ax[i + 1].set_height(x_values[i])
             x_values[i], x_values[i + 1] = x_values[i + 1], x_values[i]
     numpasses = numpasses - 1
+    plt.pause(.1)
 
 # Window will close without this
-plt.show()
+plt.show(block=True)

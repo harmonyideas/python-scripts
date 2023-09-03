@@ -121,7 +121,7 @@ class CanvasPanel(wx.Panel):
         #t = arange(0.0, 5.0, 0.01)
         t = arange(-pi, pi, 0.01)
 
-        s = (1+0.9*math.cos(8*t))*(1+.1*math.cos(24*t))*(.9+0.5*math.cos(200*t))*(1+sin(t))
+        s = (sin(t))
 
         self.axes.plot(t, s)
 

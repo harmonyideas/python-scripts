@@ -1,11 +1,10 @@
 import subprocess
 import json
 import whois
-import dns.resolver
 import traceback
 import validators
+import iptools
 import socket
-import re
 from dns.resolver import dns
 
 from flask import Flask
@@ -13,12 +12,16 @@ from flask import request
 
 app = Flask(__name__)
 
+
 def is_valid_domain(domain_name):
     return validators.domain(domain_name)
 
 def is_valid_ip(ipaddress):
-    return validators.ipv4(ipaddress)
+    return iptools.ipv4.validate_ip(ipaddress)
     
+def is_valid_ip_cidr(ipaddress):
+    return iptools.ipv4.validate_cidr(ipaddress) 
+
 @app.route('/pingTest', methods=['POST', 'GET'])
 def api_pingtest():
     response = ""
@@ -37,8 +40,10 @@ def api_pingtest():
             response = ('Unexpected Error.')
     return json.dumps(str(response))
 
+
 @app.route('/whoisTest', methods=['POST', 'GET'])
 def api_whoistest():
+    response = ""
     if request.method == "POST":
 	host = request.form['host']
         try:
@@ -51,6 +56,7 @@ def api_whoistest():
             response = "Unexpected Error"
 
     return json.dumps(str(response))
+
 
 @app.route('/dnsTest', methods=['POST', 'GET'])
 def api_dnstest():
@@ -68,6 +74,7 @@ def api_dnstest():
             response = traceback.format_exc()
 
     return json.dumps(str(response))
+
 
 @app.route('/mtrTest', methods=['POST', 'GET'])
 def api_mtrtest():
@@ -88,12 +95,13 @@ def api_mtrtest():
 
     return json.dumps(str(response))
 
+
 @app.route('/subnetcalcTest', methods=['POST', 'GET'])
 def api_subnetcalctest():
     if request.method == "POST":
         host = request.form['host']
         try:
-	    if is_valid_ip(host):
+	    if is_valid_ip_cidr(host):
                 response = subprocess.check_output(
                 ['sipcalc', host],
                 stderr=subprocess.STDOUT,  # get all output
@@ -106,6 +114,7 @@ def api_subnetcalctest():
             response = ('Unexpected Failure')
 
     return json.dumps(str(response))
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

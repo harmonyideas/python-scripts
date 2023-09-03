@@ -3,7 +3,7 @@ Just some random scripts
 
 FileName      | Description
 ------------- | -------------
-BubbleSortAnimation.py  | Dynamic animation of a bubble sort using matplotlib and bar graphs.
+BubbleSortAnimation.py  | Dynamic animation of a bubble sort using matplotlib and bar graphs. ![SCREENSHOT](https://github.com/harmonyideas/RandomStuff/blob/master/IMG/bubblesortanimation-1.PNG)    
 Dictionary.py   |   Search JSON dictionary using Flask WS [Search Page - index.html provided in /Templates] 
 Myblockchain.py | Quick example of a blockchain       
 HashTable.py     | Very simple example of a hash table using Dan Bernstein's hash function.  

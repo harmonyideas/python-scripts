@@ -14,6 +14,7 @@ class MyCards(object):
         return sep.join(map(str, iterable))
 
     def card_combinations(self, cards, n):
+        """Return a set of combinations - no duplicates allowed"""
         return {self.join(combos)
                 for combos in itertools.combinations(cards, n)}
 
@@ -25,7 +26,6 @@ class MyCards(object):
             random.shuffle(self.deck)
 
     def print_cards(self):
-        # for x in range(len(FlashCards.deck)):
         print self.deck
 
 

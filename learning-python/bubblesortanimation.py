@@ -15,10 +15,5 @@ for numpasses in range(len(x_values), 0, -1):
             ax[i].set_height(x_values[i + 1])
             ax[i + 1].set_height(x_values[i])
             x_values[i], x_values[i + 1] = x_values[i + 1], x_values[i]
-
-# Window will close without this - need to fix and update individual bars instead
+            
 plt.show()
-
-
-
-

@@ -11,7 +11,7 @@ y_pos = np.arange(len(a_list))
 
 
 swap = True
-passes = len(a_list) - 1
+numpasses = len(a_list) - 1
 while numpasses > 0 and swap:
     swap = False
     # Need to change individual bars instead of clearing current axes

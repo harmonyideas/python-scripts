@@ -33,7 +33,7 @@ class MyCards(object):
 cards = MyCards()
 cards.shuffle_cards(1)
 
-# Combinations for 2 pair of cards
+# Print all combinations for 2 pair of cards
 # print(cards.card_combinations(cards.deck, 2))
 
 # 4 random cards

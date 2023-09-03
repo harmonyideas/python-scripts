@@ -3,10 +3,11 @@ import itertools
 
 
 class MyCards(object):
+
     def __init__(self, counter=0):
-        self.value = ('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K')
+        self.value = ('A', '2', '3', '4', '5', '6', '7',
+                      '8', '9', '10', 'J', 'Q', 'K')
         self.rank = ['c', 'd', 'h', 's']
-        self.deck = range(52)
         self.deck = [(A + B) for A in self.value for B in self.rank]
 
     def join(self, iterable, sep=' '):
@@ -14,7 +15,6 @@ class MyCards(object):
         return sep.join(map(str, iterable))
 
     def card_combinations(self, cards, n):
-        """Return a set of combinations - no duplicates allowed"""
         return {self.join(combos)
                 for combos in itertools.combinations(cards, n)}
 
@@ -26,14 +26,19 @@ class MyCards(object):
             random.shuffle(self.deck)
 
     def print_cards(self):
+        # for x in range(len(FlashCards.deck)):
         print self.deck
 
 
 cards = MyCards()
-cards.shuffle_cards(100)
+cards.shuffle_cards(1)
 
 # Give me all combinations for 2 pair of cards
-print (cards.card_combinations(cards.deck, 2))
+# print(cards.card_combinations(cards.deck, 2))
 
 # Give me 4 random cards
-print (cards.pick_random_cards(4))
+# print(cards.pick_random_cards(4))
+
+# cards.print_cards()
+
+# print myCards.pick_random_cards(4)

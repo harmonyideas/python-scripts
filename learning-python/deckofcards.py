@@ -1,4 +1,4 @@
-import random
+import random, itertools
 
 class MyCards():
 
@@ -15,8 +15,8 @@ class MyCards():
     def join(self, iterable, sep=' '):
         return sep.join(map(str, iterable))
 
-    def card_combinations(self, my_cards, num):
-        return {self.join(combos) for combos in itertools.combinations(my_cards, num)}
+    def card_combinations(self, num):
+        return {self.join(combos) for combos in itertools.combinations(self.deck, num)}
 
     def pick_random_cards(self, count):
         return random.sample(self.deck, abs(count))
@@ -32,7 +32,7 @@ cards = MyCards()
 cards.shuffle_cards(1)
 
 # Print all combinations for 2 pair of cards
-# print(cards.card_combinations(cards.deck, 2))
+#print(cards.card_combinations(2))
 
 # 4 random cards
 # print(cards.pick_random_cards(4))

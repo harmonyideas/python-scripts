@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 
-with open('static/populationbycountry19802010millions.csv', 'rU') as csvfile:
+with open('static/populationbycountry19802010millions.csv', newline='') as csvfile:
     stats = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     for row in stats:
         if row['country'] == 'North America':

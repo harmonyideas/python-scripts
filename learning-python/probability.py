@@ -26,8 +26,3 @@ def combo(items, n):
 
 def find(items, search, n):
     return {s for s in items if s.count(search) == n}
-
-
-#cards = combine('A23456789TJQK', 'CHDS')
-#cards_combos = combo(cards, 2)
-

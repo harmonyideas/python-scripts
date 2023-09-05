@@ -10,3 +10,4 @@ def bubble_sort(a_list):
 
 my_list = random.sample(range(100), 100)
 bubble_sort(my_list)
+print(my_list)

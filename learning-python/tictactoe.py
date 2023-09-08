@@ -1,5 +1,5 @@
-import wx
 import random
+import wx
 
 
 class TicTacToe(wx.Frame):

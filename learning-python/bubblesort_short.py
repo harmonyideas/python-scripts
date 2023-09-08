@@ -2,7 +2,7 @@ import random
 
 
 def bubblesort_short(a_list):
-    for numpasses in range(len(a_list) - 1, 0, -1):
+    for _ in range(len(a_list) - 1, 0, -1):
         swap = False
         for i, value in enumerate(a_list[:-1]):
             if value > a_list[i + 1]:

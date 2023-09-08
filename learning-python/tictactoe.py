@@ -5,24 +5,24 @@ import random
 class TicTacToe(wx.Frame):
     counter = 0
     board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    scale = {'width': 90, 'height': 90}
+    scale = {"width": 90, "height": 90}
     moves = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
     def __init__(self, parent, title):
-
-        super(TicTacToe, self).__init__(parent, title=title,
-                                        size=(400, 400))
+        super(TicTacToe, self).__init__(parent, title=title, size=(400, 400))
         self.panel = wx.Panel(self)
-        
-        self.winning_combinations = ((0, 1, 2),  # across the top
-                                     (3, 4, 5),  # across the middle
-                                     (6, 7, 8),  # across the bottom
-                                     (0, 3, 6),  # down the left side
-                                     (1, 4, 7),  # down the middle
-                                     (2, 5, 8),  # down the right side
-                                     (2, 4, 6),  # diagonal
-                                     (0, 4, 8))  # diagonal
-        
+
+        self.winning_combinations = (
+            (0, 1, 2),  # across the top
+            (3, 4, 5),  # across the middle
+            (6, 7, 8),  # across the bottom
+            (0, 3, 6),  # down the left side
+            (1, 4, 7),  # down the middle
+            (2, 5, 8),  # down the right side
+            (2, 4, 6),  # diagonal
+            (0, 4, 8),
+        )  # diagonal
+
         self.InitUI()
 
     def InitUI(self):
@@ -30,11 +30,13 @@ class TicTacToe(wx.Frame):
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
         self.l1 = wx.StaticText(
-            self.panel, -1, "Please select a move [0-8]", pos=(3, 325))
+            self.panel, -1, "Please select a move [0-8]", pos=(3, 325)
+        )
 
         hbox1.Add(self.l1, 1, wx.EXPAND | wx.ALIGN_LEFT | wx.ALL, 5)
-        self.t1 = wx.TextCtrl(self.panel, pos=(165, 320),
-                              size=(50, 25), style=wx.TE_PROCESS_ENTER)
+        self.t1 = wx.TextCtrl(
+            self.panel, pos=(165, 320), size=(50, 25), style=wx.TE_PROCESS_ENTER
+        )
 
         hbox1.Add(self.t1, 1, wx.EXPAND | wx.ALIGN_LEFT | wx.ALL, 5)
         vbox.Add(hbox1)
@@ -51,12 +53,11 @@ class TicTacToe(wx.Frame):
         z = 0
         for x in range(0, 3):
             for y in range(0, 3):
-                self.board[z] = [column, row, self.scale['width'],
-                                 self.scale['height']]
-                dc.DrawRectangle(column, row, int(self.scale['width']),
-                                 int(self.scale['height']))
-                dc.DrawLabel(str(self.moves[z]),
-                             self.board[z], wx.ALIGN_CENTER)
+                self.board[z] = [column, row, self.scale["width"], self.scale["height"]]
+                dc.DrawRectangle(
+                    column, row, int(self.scale["width"]), int(self.scale["height"])
+                )
+                dc.DrawLabel(str(self.moves[z]), self.board[z], wx.ALIGN_CENTER)
                 column = column + 100
                 z = z + 1
             column = 10
@@ -109,9 +110,8 @@ class TicTacToe(wx.Frame):
             if all(self.moves[i] == le for i in combo):
                 return True
         return False
-    
-if name == 'main':
-  app = wx.App()
-  TicTacToe(None, 'TicTacToe')
-  app.MainLoop()
-    
+
+if __name__ == "main":
+    app = wx.App()
+    TicTacToe(None, "TicTacToe")
+    app.MainLoop()

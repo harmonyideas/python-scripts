@@ -65,7 +65,6 @@ $(document).ready(function () {
         $(ele[0].childNodes[3]).text('Progress: ' + "[" + percent + '%' + "]");
         if ('result' in data) {
             // show result 
-            $('#result').html('Result: ' + "[" + data['result'] + "]");
             $(ele[0].childNodes[11]).html('Result for file: ' + data['filepath'] + data['result']);
         }
     }

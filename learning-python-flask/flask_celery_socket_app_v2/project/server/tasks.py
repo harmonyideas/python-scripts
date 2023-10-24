@@ -1,18 +1,11 @@
 ''' Define celery tasks to be processed by the worker(s). '''
 from __future__ import absolute_import
-import os
 import time
-import logging
-import json
 import re
 from flask import jsonify
 from requests import post
 import pandas as pd
 from celeryapp import app
-
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 @app.task(bind=True)
 def read_task(self,filejobid, progressId, userid, url, filepath):
@@ -22,8 +15,10 @@ def read_task(self,filejobid, progressId, userid, url, filepath):
     where we can update the task status with useful information.
     '''
     time.sleep(1)
+    # Count the occurrences of words in the file.
     results = count_word_occurrences(filepath)
 
+    # Update the task status.
     meta = {
     "current": 100,
     "total": 100,
@@ -34,8 +29,13 @@ def read_task(self,filejobid, progressId, userid, url, filepath):
     "userid": userid,
     "filepath": filepath
   }
+    self.update_state(state="SUCCESS", meta=meta)
+    
+    # Post the results to the URL   
     post(url, json=meta, timeout=5)
-    return json.dumps(meta)
+
+    # Return the task status and results
+    return jsonify({"task_": self.request.id}), 200
 
 def count_word_occurrences(file_name):
   """Counts the number of occurrences of each word in a text file.

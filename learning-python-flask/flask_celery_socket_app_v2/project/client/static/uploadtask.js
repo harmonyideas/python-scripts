@@ -68,6 +68,7 @@ $(document).ready(function() {
         // If the response is successful, update the status message.
         if (response.status === 202) {
             const taskIds = JSON.parse(await response.text()).task_ids;
+            console.log(taskIds);
             if (taskIds.length > 0) {
                 $('#status').text('[ File(s) uploaded successfully. Task Started...]');
             } else {

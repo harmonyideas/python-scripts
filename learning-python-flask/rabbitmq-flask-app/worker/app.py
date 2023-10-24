@@ -1,21 +1,38 @@
 import pika
 
-try:
-    parameters = pika.ConnectionParameters(host="rabbitmq")
-    connection = pika.BlockingConnection(parameters)
-    channel = connection.channel()
-    channel.queue_declare(queue="task_queue", durable=True)
-    print(" Waiting for messages...")
-except pika.exceptions.AMQPConnectionError as exc:
-    print("Failed to connect to RabbitMQ service.\nCause: %s" % exc)
+
+def main():
+    try:
+        # Connect to RabbitMQ
+        parameters = pika.ConnectionParameters(host="rabbitmq")
+        connection = pika.BlockingConnection(parameters)
+        channel = connection.channel()
+
+        # Declare the queue
+        channel.queue_declare(queue="task_queue", durable=True)
+
+        # Start consuming messages from the queue
+        channel.basic_consume(queue="task_queue", on_message_callback=callback)
+        channel.start_consuming()
+
+    except pika.exceptions.AMQPConnectionError as exc:
+        # Handle connection error
+        print(f"Failed to connect to RabbitMQ service. Cause: {exc}")
+        return
+
+    # Wait for the consumer to be stopped
+    while channel.is_consuming():
+        channel.wait()
 
 
 def callback(ch, method, properties, body):
-    print(" Received %s" % body.decode())
-    print(" Done")
+    # Process the message
+    print(f"Received {body.decode()}")
+    print("Done")
+
+    # Acknowledge the message
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
-channel.basic_qos(prefetch_count=1)
-channel.basic_consume(queue="task_queue", on_message_callback=callback)
-channel.start_consuming()
+if __name__ == "__main__":
+    main()

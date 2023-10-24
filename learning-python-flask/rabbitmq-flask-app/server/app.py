@@ -1,33 +1,49 @@
+import json
+import pika
 from flask import Flask, request
-import pika, json
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def index():
-    return 'OK'
+    return "OK"
 
-@app.route('/contactform', methods=['POST'])
+@app.route("/contactform", methods=["POST"])
 def contactform():
+    # Validate the request form data
+
+    # Convert the request form data to JSON
     json_data = json.dumps(request.form.to_dict(flat=False))
+
     try:
+        # Connect to RabbitMQ
         connection = pika.BlockingConnection(pika.ConnectionParameters(host="rabbitmq"))
+
+        # Create a channel
+        channel = connection.channel()
+
+        # Declare the queue
+        channel.queue_declare(queue="task_queue", durable=True)
+
+        # Publish the message to the queue
+        channel.basic_publish(
+            exchange="",
+            routing_key="task_queue",
+            body=json_data,
+            properties=pika.BasicProperties(delivery_mode=2),
+        )
+
+        # Close the connection
+        connection.close()
+
     except pika.exceptions.AMQPConnectionError as exc:
-        print("Failed to connect to RabbitMQ service. Message wont be sent.")
-        return
+        # Handle connection error
+        print(f"Failed to connect to RabbitMQ service. Message won't be sent. {exc}")
+        return None
 
-    channel = connection.channel()
-    channel.queue_declare(queue='task_queue', durable=True)
-    channel.basic_publish(
-        exchange='',
-        routing_key='task_queue',
-        body=json_data,
-        properties=pika.BasicProperties(
-            delivery_mode=2,  # make message persistent
-        ))
+    # Return a success message
+    return f"___ Sent: {json_data}"
 
-    connection.close()
-    return " ___ Sent: %s" % json_data
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')

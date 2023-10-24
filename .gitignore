@@ -161,5 +161,6 @@ cython_debug/
 
 # Upload folder
 .learning-python-flask/flask_celery_socket_app/project/server/uploads/
+.learning-python-flask/flask_celery_socket_app_v2/project/server/uploads/
 
 

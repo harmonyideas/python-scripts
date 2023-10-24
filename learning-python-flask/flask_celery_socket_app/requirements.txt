@@ -3,7 +3,7 @@ celery==5.3.1
 Flask==2.3.3
 flask_cors==4.0.0
 flask_socketio==5.3.5
-gevent==23.7.0
+gevent==23.9.0
 gevent-websocket==0.10.1
 gunicorn==21.2.0
 numpy==1.25.2

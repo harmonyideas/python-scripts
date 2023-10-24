@@ -89,7 +89,7 @@ def upload():
     except Exception as e:
       logger.exception("An error occured trying to upload file!")
     
-    return jsonify({"task_id": task_list}), 202
+    return jsonify({"task_ids": task_list}), 202
 
 
 @app.route("/clients", methods=["GET"])

@@ -32,9 +32,10 @@ def read_task(self,filejobid, progressId, userid, url, filepath):
     "filejobid": filejobid,
     "progressId": progressId,
     "userid": userid,
-    "filepath": filepath,
+    "filepath": filepath
   }
-    return post(url, json=meta, timeout=5)
+    post(url, json=meta, timeout=5)
+    return json.dumps(meta)
 
 def count_word_occurrences(file_name):
   """Counts the number of occurrences of each word in a text file.

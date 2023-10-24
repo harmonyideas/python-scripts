@@ -2,40 +2,53 @@ import random
 from itertools import combinations
 
 class MyCards:
-    VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    SUITS = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
+  """A class to represent a deck of cards."""
 
-    def __init__(self):
-        self.deck = []
-        self.build()
+  VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+  SUITS = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
 
-    def build(self):
-        self.deck = [(value, suit) for value in self.VALUES for suit in self.SUITS]
+  def __init__(self):
+    """Initializes a new deck of cards."""
+    self.deck = []
+    self.build()
 
-    def join(self, iterable, sep=' '):
-        return sep.join(map(str, iterable))
+  def build(self):
+    """Builds the deck of cards."""
+    self.deck = [(value, suit) for value in self.VALUES for suit in self.SUITS]
 
-    def card_combinations(self, num):
-        return {self.join(combos) for combos in combinations(self.deck, num)}
+  def join(self, iterable, sep=' '):
+    """Joins the elements of an iterable into a string, separated by a separator."""
+    return sep.join(map(str, iterable))
 
-    def pick_random_cards(self, count):
-        return random.sample(self.deck, abs(count))
+  def card_combinations(self, num):
+    """Generates all possible combinations of `num` cards from the deck."""
+    return {self.join(combos) for combos in combinations(self.deck, num)}
 
-    def shuffle_cards(self, repeat=1):
-        for _ in range(abs(repeat)):
-            random.shuffle(self.deck)
+  def pick_random_cards(self, count):
+    """Picks a random sample of `count` cards from the deck."""
+    return random.sample(self.deck, abs(count))
 
-    def print_cards(self):
-        print(self.deck)
+  def shuffle_cards(self, repeat=1):
+    """Shuffles the deck of cards `repeat` times."""
+    for _ in range(abs(repeat)):
+      random.shuffle(self.deck)
 
+  def print_cards(self):
+    """Prints the deck of cards."""
+    print(self.deck)
+
+# Create a new deck of cards.
 cards = MyCards()
-cards.shuffle_cards(1)
 
-# Print all combinations for 2 pair of cards
-#print(cards.card_combinations(4))
+# Shuffle the deck of cards.
+cards.shuffle_cards()
 
-# 4 random cards
-#print(cards.pick_random_cards(4))
+# Print all combinations for 2 pair of cards.
+print(cards.card_combinations(4))
 
-# Print all cards
+# Pick 4 random cards.
+print(cards.pick_random_cards(4))
+
+# Print all cards.
 cards.print_cards()
+

@@ -59,37 +59,34 @@ def home():
 @cross_origin()
 def upload():
     """
-    Here, the server receives the json file with the POST request,
-    then saves it to a folder, /uploads.
-    Then we apply a Celery task asynchronously with .apply_async(),
-    with read_json_task as the Celery task. Once that’s sent off,
-    we send the id of the task back to the client.
+    Uploads a file to the server and starts a Celery task to process it.
+
+    Returns:
+        A JSON response with the IDs of the started Celery tasks.
     """
-    task_list = []
-    try:
-      if request.method == "POST":
-        if "file" not in request.files:
-          return redirect(url_for("index"))
 
-      uploaded_files = request.files.getlist("file")
-      url = url_for("event", _external=True)
-      userid = request.form.get("userid")
+    if request.method != "POST":
+        return redirect(url_for("index"))
 
-      for index, file in enumerate(uploaded_files):
+    uploaded_files = request.files.getlist("file")
+    url = url_for("event", _external=True)
+    userid = request.form.get("userid")
+
+    task_ids = []
+    for index, file in enumerate(uploaded_files):
         if allowed_file(file.filename):
-          filename = request.form.get(f"file_uploads[{index}].name")
-          filejobid = request.form.get(f"file_uploads[{index}].jobid")
-          progressId = request.form.get(f"file_uploads[{index}].progressId")
-          filepath = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
-          file.save(filepath)
-          file_task = read_task.apply_async(
-            args=[filejobid, progressId, userid, url, filepath]
-          )
-          task_list.append(str(file_task.task_id))
-    except Exception as e:
-      logger.exception("An error occured trying to upload file!")
-    
-    return jsonify({"task_ids": task_list}), 202
+            filename = request.form.get(f"file_uploads[{index}].name")
+            filejobid = request.form.get(f"file_uploads[{index}].jobid")
+            progressId = request.form.get(f"file_uploads[{index}].progressId")
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
+            file.save(filepath)
+
+            file_task = read_task.apply_async(
+                args=[filejobid, progressId, userid, url, filepath]
+            )
+            task_ids.append(str(file_task.task_id))
+
+    return jsonify({"task_ids": task_ids}), 202
 
 
 @app.route("/clients", methods=["GET"])

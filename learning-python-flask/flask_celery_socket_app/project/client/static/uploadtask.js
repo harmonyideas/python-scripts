@@ -20,7 +20,7 @@ $(document).ready(function () {
                 // add task status elements (figure out better method for handling array)
                 data.append(`file_uploads[${index}].name`, document.getElementById('files').files[index].name);
                 data.append(`file_uploads[${index}].jobid`, generateID("filejob"));
-                data.append(`file_uploads[${index}].progressid`, generateID("progress"));
+                data.append(`file_uploads[${index}].progressId`, generateID("progress"));
                 data.append('file', input.files[index]);
                 // build status elements in html string (needs cleanup)
                 const cbutton = `<button type="button" class="collapsible">Show Results</button>`;
@@ -28,7 +28,7 @@ $(document).ready(function () {
                         <div class="column">File: [ ${document.getElementById('files').files[`${index}`].name} ]</div>
                         <div class="column">Waiting for results...</div>
                         <div class="column">Waiting for results...</div>
-                        <div class="column"><progress id=${data.get(`file_uploads[${index}].progressid`)} max="100"></div>
+                        <div class="column"><progress id=${data.get(`file_uploads[${index}].progressId`)} max="100"></div>
                         ${cbutton}
                         <div class="result" id="result"></div> 
                         </div></div><hr>`;
@@ -55,17 +55,35 @@ $(document).ready(function () {
             });
         }
     }
+    function updateProgress(data) {
+      // Update the progress bar.
+      const progressBar = document.getElementById(data.progressId);
+      progressBar.value = parseInt(data.current / data.total * 100);
+
+      // Update the status of the job.
+      const statusElement = document.querySelector(`#${data.fileJobId} > .status`);
+      statusElement.textContent = `Status: ${data.status}`;
+
+      // Update the progress of the job.
+      const progressElement = document.querySelector(`#${data.fileJobId} > .progress`);
+      progressElement.textContent = `Progress: ${parseInt(data.current / data.total * 100)}%`;
+
+      // If the job is finished, show the result.
+      if ('result' in data) {
+        const resultElement = document.querySelector(`#${data.fileJobId} > .result`);
+        resultElement.textContent = `Result: ${data.result}`;
+      }
+    }
 
     function update_progress(data) {
         //update progress bar
         percent = parseInt(data['current'] * 100 / data['total']);
-        document.getElementById(data.progressid).value = percent;
+        document.getElementById(data.progressId).value = percent;
         var ele = $('#' + data.filejobid); //get parent elementid of <div> tag
         $(ele[0].childNodes[5]).text('Status: ' + "[" + data['status'] + "]");
         $(ele[0].childNodes[3]).text('Progress: ' + "[" + percent + '%' + "]");
         if ('result' in data) {
             // show result 
-            $('#result').html('Result: ' + "[" + data['result'] + "]");
             $(ele[0].childNodes[11]).html('Result for file: ' + data['filepath'] + data['result']);
         }
     }
@@ -88,7 +106,7 @@ $(document).ready(function () {
     // event handler for server sent celery status
     // the data is displayed in the "FileJob" section of the page
     socket.on('celerystatus', function (msg) {
-        update_progress(msg);
+        updateProgress(msg);
     });
     // event handler for server sent general status
     // the data is displayed in the "Status" section of the page

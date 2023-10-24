@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @app.task(bind=True)
-def read_csv_task(self,filejobid, progressid, userid, url, path):
+def read_csv_task(self,filejobid, progressId, userid, url, path):
     '''
     Each task needs to have a decorator, @app.task. 
     By setting bind=True, the task function can access self as an argument, 
@@ -31,7 +31,7 @@ def read_csv_task(self,filejobid, progressid, userid, url, path):
     except Exception as e:
         logger.exception("An error occured trying to read csv file!")
     meta = {'current': 100, 'total': 100, 'status': 'Task Completed',
-            'result': result, 'filejobid': filejobid, 'progressid' : progressid, 'userid': userid,
+            'result': result, 'filejobid': filejobid, 'progressId' : progressId, 'userid': userid,
             'filepath': path}
     post(url, json=meta, timeout=5)
     return meta

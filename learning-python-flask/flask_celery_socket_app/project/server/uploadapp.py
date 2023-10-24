@@ -6,6 +6,7 @@ monkey.patch_all()
 import os
 import uuid
 import logging
+import time
 from flask import (
     Flask,
     jsonify,
@@ -66,29 +67,28 @@ def upload():
     """
     task_list = []
     try:
-        if request.method == "POST":
-            if "file" not in request.files:
-                return redirect(url_for("index"))
+      if request.method == "POST":
+        if "file" not in request.files:
+          return redirect(url_for("index"))
 
-            uploaded_files = request.files.getlist("file")
-            url = url_for("event", _external=True)
-            userid = request.form.get("userid")
+      uploaded_files = request.files.getlist("file")
+      url = url_for("event", _external=True)
+      userid = request.form.get("userid")
 
-            for index, file in enumerate(uploaded_files):
-                if  allowed_file(file.filename):
-                    filename = request.form.get(f"file_uploads[{index}].name")
-                    filejobid = request.form.get(f"file_uploads[{index}].jobid")
-                    progressid = request.form.get(f"file_uploads[{index}].progressid")
-                    path = os.path.join(
-                        app.config["UPLOAD_FOLDER"], secure_filename(filename)
-                    )
-                    file.save(path)
-                    file_task = read_csv_task.apply_async(
-                        args=[filejobid, progressid, userid, url, path]
-                    )
-                    task_list.append(str(file_task.task_id))
+      for index, file in enumerate(uploaded_files):
+        if allowed_file(file.filename):
+          filename = request.form.get(f"file_uploads[{index}].name")
+          filejobid = request.form.get(f"file_uploads[{index}].jobid")
+          progressid = request.form.get(f"file_uploads[{index}].progressid")
+          path = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
+          file.save(path)
+          file_task = read_csv_task.apply_async(
+            args=[filejobid, progressid, userid, url, path]
+          )
+          task_list.append(str(file_task.task_id))
     except Exception as e:
-        logger.exception("An error occured trying to upload csv file!")
+      logger.exception("An error occured trying to upload csv file!")
+    
     return jsonify({"task_id": task_list}), 202
 
 
@@ -142,3 +142,4 @@ def events_disconnect():
 
 if __name__ == "__main__":
     socketio.run(port=8982, debug=True, host="0.0.0.0")
+

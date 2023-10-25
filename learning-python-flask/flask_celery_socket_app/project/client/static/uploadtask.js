@@ -33,6 +33,7 @@ $(document).ready(function () {
             <div id="${formData.get(`file_uploads[${index}].jobid`)}">
                    <div class="column">File: [ ${document.getElementById('files').files[index].name} ]</div>
               <div class="column"><progress id="${formData.get(`file_uploads[${index}].progressid`)}" max="100"></div>
+              <div class="taskid" id="taskid">TaskID</div>
               <button type="button" class="collapsible">Show Results</button>
               <div class="result" id="result"></div> 
             </div>
@@ -54,7 +55,7 @@ $(document).ready(function () {
 
             if (response.status === 202) {
                const data = await response.json();
-               if (data.task_id.length > 0) {
+               if (data.taskid.length > 0) {
                   $('#status').text('File(s) uploaded successfully. Task Started...');
                } else {
                   $('#status').text('Task ID not received - please check file extension');
@@ -78,9 +79,13 @@ $(document).ready(function () {
       progressElement.text('Progress: [' + percent + '%]');
 
       // Update the status of the job.
-      //const statusElement = document.querySelector(`#${data.fileJobId} > .status`);
+      const statusElement = $('#' + data.filejobid).find('.taskid');
+      statusElement.html('TaskID(s): ' + data.taskid);
       //statusElement.textContent = `Status: ${data.status}`;
 
+      //Update the job to include the taskid
+        const taskidElement = $('#' + data.filejobid).find('.taskid');
+        taskidElement.text('TaskID: ' + data.taskid);
 
       // If the job is finished, show the result.
       if (data.result) {

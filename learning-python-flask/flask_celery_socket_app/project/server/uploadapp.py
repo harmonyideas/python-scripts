@@ -1,11 +1,5 @@
-""" Setup Flask routes to to process csv file uploads using celery  """
-from __future__ import absolute_import
-from gevent import monkey
-
-monkey.patch_all()
 import os
 import uuid
-import logging
 import time
 from flask import (
     Flask,
@@ -26,17 +20,14 @@ from main import create_app
 app = create_app()
 app.clients = {}
 
-# Setup logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# configure cors in case upload form is hosted elsewhere externally)
+# Configure CORS in case upload form is hosted elsewhere externally
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-# set SocketIO to connect to message queue (optional)
+# Set SocketIO to connect to message queue (optional)
 socketio = SocketIO(app, message_queue=app.config["MESSAGE_QUEUE"])
 
 
+# Define a helper function to check if a file is allowed
 def allowed_file(filename):
     return (
         "." in filename
@@ -44,6 +35,7 @@ def allowed_file(filename):
     )
 
 
+# Define defautl route
 @app.route("/", methods=["GET", "POST"])
 @cross_origin()
 def home():
@@ -55,59 +47,70 @@ def home():
     return redirect(url_for("index"))
 
 
+# Define a route to handle file uploads
 @app.route("/upload", methods=["POST", "GET", "OPTIONS"])
 @cross_origin()
 def upload():
     """
-    Here, the server receives the json file with the POST request,
-    then saves it to a folder, /uploads.
-    Then we apply a Celery task asynchronously with .apply_async(),
-    with read_json_task as the Celery task. Once that’s sent off,
-    we send the id of the task back to the client.
+    Handle file uploads and submit them to Celery tasks
+
+    Returns:
+        JSON object with a list of task IDs
     """
-    task_list = []
-    try:
-      if request.method == "POST":
-        if "file" not in request.files:
-          return redirect(url_for("index"))
 
-      uploaded_files = request.files.getlist("file")
-      url = url_for("event", _external=True)
-      userid = request.form.get("userid")
+    if request.method != "POST":
+        return redirect(url_for("index"))
 
-      for index, file in enumerate(uploaded_files):
+    # Get the uploaded files
+    uploaded_files = request.files.getlist("file")
+
+    # Get the URL of the event endpoint
+    url = url_for("event", _external=True)
+
+    # Get the user ID
+    userid = request.form.get("userid")
+
+    # Iterate over the uploaded files and submit them to Celery tasks
+    taskid = []
+    for index, file in enumerate(uploaded_files):
         if allowed_file(file.filename):
-          filename = request.form.get(f"file_uploads[{index}].name")
-          filejobid = request.form.get(f"file_uploads[{index}].jobid")
-          progressid = request.form.get(f"file_uploads[{index}].progressid")
-          path = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
-          file.save(path)
-          file_task = read_csv_task.apply_async(
-            args=[filejobid, progressid, userid, url, path]
-          )
-          task_list.append(str(file_task.task_id))
-    except Exception as e:
-      logger.exception("An error occured trying to upload csv file!")
-    
-    return jsonify({"task_id": task_list}), 202
+            filename = request.form.get(f"file_uploads[{index}].name")
+            filejobid = request.form.get(f"file_uploads[{index}].jobid")
+            progressid = request.form.get(f"file_uploads[{index}].progressid")
+            path = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
+            file.save(path)
+
+            # Submit the file to a Celery task
+            file_task = read_csv_task.apply_async(
+                args=[filejobid, progressid, userid, url, path]
+            )
+
+            # Add the task ID to the list of task IDs to return to the client
+            taskid.append(str(file_task.task_id))
+
+    # Return the list of task IDs to the client
+    return jsonify({"taskid": taskid}), 202
 
 
-@app.route("/clients", methods=["GET"])
-def clients():
-    """
-    Here, the server responds with a list of connected clients
-    """
-    return jsonify(list({"clients": app.clients.keys()}))
-
-
+# Define a route to handle event messages
 @app.route("/event/", methods=["POST"])
 def event():
     """
-    Here, the server handles event messages for our file task
+    Handle event messages from Celery tasks
+
+    Returns:
+        String "ok" if the message was handled successfully, or "error" otherwise
     """
+
+    # Get the user ID from the message
     userid = request.json["userid"]
+
+    # Get the data from the message
     data = request.json
+
+    # Get the namespace for the user
     ns = app.clients.get(userid)
+    # Emit the event to the client
     if ns and data:
         socketio.emit("celerystatus", data, namespace=ns)
         return "ok"
@@ -142,4 +145,3 @@ def events_disconnect():
 
 if __name__ == "__main__":
     socketio.run(port=8982, debug=True, host="0.0.0.0")
-

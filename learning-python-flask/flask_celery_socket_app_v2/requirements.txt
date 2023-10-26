@@ -9,4 +9,4 @@ gunicorn==21.2.0
 numpy==1.25.2
 pandas==2.1.0
 Requests==2.31.0
-Werkzeug==2.3.7
+werkzeug>=3.0.1

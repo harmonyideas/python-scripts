@@ -20,6 +20,7 @@ def read_task(self,filejobid, progressId, userid, url, filepath):
 
     # Update the task status.
     meta = {
+    "taskid": self.request.id,
     "current": 100,
     "total": 100,
     "status": "Task Completed",
@@ -29,13 +30,11 @@ def read_task(self,filejobid, progressId, userid, url, filepath):
     "userid": userid,
     "filepath": filepath
   }
-    self.update_state(state="SUCCESS", meta=meta)
-    
     # Post the results to the URL   
-    post(url, json=meta, timeout=5)
+    response_post = post(url, json=meta, timeout=5)
 
     # Return the task status and results
-    return jsonify({"task_": self.request.id}), 200
+    return response_post.status_code
 
 def count_word_occurrences(file_name):
   """Counts the number of occurrences of each word in a text file.

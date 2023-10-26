@@ -105,10 +105,11 @@ def event():
     userid = request.json["userid"]
     data = request.json
     ns = app.clients.get(userid)
+    # Emit the event to the client
     if ns and data:
         socketio.emit("celerystatus", data, namespace=ns)
-        return "ok"
-    return "error", 404
+        return jsonify({"status":"ok"}), 200
+    return jsonify({"status":"error"}), 404
 
 
 @socketio.on("status", namespace="/events")

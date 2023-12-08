@@ -1,4 +1,4 @@
-# collection-of-code
+# collection of code
 This project contains a collection of short Python scripts. 
 
 DirName      | Description

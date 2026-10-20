@@ -111,7 +111,7 @@ class TicTacToe(wx.Frame):
                 return True
         return False
 
-if __name__ == "main":
+if __name__ == "__main__":
     app = wx.App()
     TicTacToe(None, "TicTacToe")
     app.MainLoop()

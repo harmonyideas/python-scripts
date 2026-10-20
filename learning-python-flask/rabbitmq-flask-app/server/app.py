@@ -1,6 +1,6 @@
 import json
 import pika
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -13,7 +13,8 @@ def contactform():
     # Validate the request form data
 
     # Convert the request form data to JSON
-    json_data = json.dumps(request.form.to_dict(flat=False))
+    form_data = request.form.to_dict(flat=False)
+    json_data = json.dumps(form_data)
 
     try:
         # Connect to RabbitMQ
@@ -39,11 +40,12 @@ def contactform():
     except pika.exceptions.AMQPConnectionError as exc:
         # Handle connection error
         print(f"Failed to connect to RabbitMQ service. Message won't be sent. {exc}")
-        return None
+        return jsonify({"status": "error", "message": "Message queue unavailable"}), 503
 
-    # Return a success message
-    return f"___ Sent: {json_data}"
+    # Return a success message as JSON. jsonify sets application/json and escapes
+    # the user-supplied values, so they are not reflected as HTML.
+    return jsonify({"status": "sent", "data": form_data}), 200
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(host="0.0.0.0")
 

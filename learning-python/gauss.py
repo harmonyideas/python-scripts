@@ -3,7 +3,7 @@
 
 
 def sum_numbers(num_seq):
-    s = (num_seq[-1] / 2) * (num_seq[0] + num_seq[-1])
+    s = len(num_seq) * (num_seq[0] + num_seq[-1]) // 2
     return s
 
 

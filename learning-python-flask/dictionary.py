@@ -11,13 +11,17 @@ class MyDictionary():
         self.add_routes()
 
     def load_words(self):
+        filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dictionary.json')
         try:
-          filepath = os.path.abspath(__file__)
-          with open(os.path.join(os.path.dirname(filepath), 'dictionary.json', encoding='utf-8')) as f:
-            return json.load(f)
-        except OSError as e:
-            print("Could not open/read file:", fname)
-            return str(e)
+            with open(filepath, encoding='utf-8') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            print(f"dictionary.json not found at {filepath}. "
+                  "Add the word list to enable lookups; searches will return 'not found' until then.")
+            return {}
+        except (OSError, ValueError) as e:
+            print(f"Could not read {filepath}: {e}")
+            return {}
 
     def add_routes(self):
         @app.route('/home', methods=['GET'])

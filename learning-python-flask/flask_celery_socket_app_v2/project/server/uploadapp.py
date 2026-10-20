@@ -26,6 +26,12 @@ from main import create_app
 app = create_app()
 app.clients = {}
 
+# Reject request bodies larger than 16 MB
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
+
+# Make sure the upload folder exists before any file is saved
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -75,10 +81,10 @@ def upload():
     task_ids = []
     for index, file in enumerate(uploaded_files):
         if allowed_file(file.filename):
-            filename = request.form.get(f"file_uploads[{index}].name")
             filejobid = request.form.get(f"file_uploads[{index}].jobid")
             progressId = request.form.get(f"file_uploads[{index}].progressId")
-            filepath = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
+            # Save under the same name that passed the extension check
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(file.filename))
             file.save(filepath)
 
             file_task = read_task.apply_async(
@@ -94,7 +100,7 @@ def clients():
     """
     Here, the server responds with a list of connected clients
     """
-    return jsonify(list({"clients": app.clients.keys()}))
+    return jsonify(list(app.clients.keys()))
 
 
 @app.route("/event/", methods=["POST"])
@@ -139,5 +145,6 @@ def events_disconnect():
 
 
 if __name__ == "__main__":
-    socketio.run(port=8982, debug=True, host="0.0.0.0")
+    # Debug is off and the server binds to localhost unless HOST is set explicitly
+    socketio.run(port=8982, debug=False, host=os.environ.get("HOST", "127.0.0.1"))
 

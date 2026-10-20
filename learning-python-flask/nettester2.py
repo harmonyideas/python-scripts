@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import whois
 import dns.resolver
@@ -16,7 +17,7 @@ def api_pingtest():
 
     try:
         response = subprocess.check_output(
-            ['ping', '-c', '3', host],
+            ['ping', '-c', '3', '--', host],
             stderr=subprocess.STDOUT,  # get all output
             universal_newlines=True,  # return string not bytes
         )
@@ -68,7 +69,7 @@ def api_mtrtest():
 
     try:
         response = subprocess.check_output(
-            ['mtr', '-rw', host],
+            ['mtr', '-rw', '--', host],
             stderr=subprocess.STDOUT,  # get all output
             universal_newlines=True,  # return string not bytes
         )
@@ -88,7 +89,7 @@ def api_subnetcalctest():
 
     try:
         response = subprocess.check_output(
-            ['sipcalc', host],
+            ['sipcalc', '--', host],
             stderr=subprocess.STDOUT,  # get all output
             universal_newlines=True,  # return string not bytes
         )
@@ -101,4 +102,6 @@ def api_subnetcalctest():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    # Bind to localhost by default. These endpoints run ping, mtr, and sipcalc
+    # with no authentication, so set NETTESTER_HOST only on a trusted network.
+    app.run(host=os.environ.get('NETTESTER_HOST', '127.0.0.1'))

@@ -20,6 +20,12 @@ from main import create_app
 app = create_app()
 app.clients = {}
 
+# Reject request bodies larger than 16 MB
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
+
+# Make sure the upload folder exists before any file is saved
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+
 # Configure CORS in case upload form is hosted elsewhere externally
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -74,10 +80,10 @@ def upload():
     taskid = []
     for index, file in enumerate(uploaded_files):
         if allowed_file(file.filename):
-            filename = request.form.get(f"file_uploads[{index}].name")
             filejobid = request.form.get(f"file_uploads[{index}].jobid")
             progressid = request.form.get(f"file_uploads[{index}].progressid")
-            path = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(filename))
+            # Save under the same name that passed the extension check
+            path = os.path.join(app.config["UPLOAD_FOLDER"], secure_filename(file.filename))
             file.save(path)
 
             # Submit the file to a Celery task
@@ -145,4 +151,5 @@ def events_disconnect():
 
 
 if __name__ == "__main__":
-    socketio.run(port=8982, debug=True, host="0.0.0.0")
+    # Debug is off and the server binds to localhost unless HOST is set explicitly
+    socketio.run(port=8982, debug=False, host=os.environ.get("HOST", "127.0.0.1"))

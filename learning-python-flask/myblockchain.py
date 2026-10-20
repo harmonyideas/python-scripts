@@ -5,54 +5,56 @@ from uuid import uuid4
 from flask import Flask, jsonify, request
 
 class Blockchain:
-   def __init__(self):
-       self.chain = []
-       self.current_transactions = []
-       # Start the genesis block
-       self.new_block(previous_hash='1', proof=100)
+    def __init__(self):
+        self.chain = []
+        self.current_transactions = []
+        # Start the genesis block
+        self.new_block(previous_hash='1', proof=100)
 
-   def new_block(self, proof, previous_hash=None):
-       block = {
-           'index': len(self.chain),
-           'timestamp': time(),
-           'transactions': self.current_transactions,
-           'proof': proof,
-           'previous_hash': previous_hash or self.hash(self.chain[-1]),
-       }
+    def new_block(self, proof, previous_hash=None):
+        block = {
+            'index': len(self.chain),
+            'timestamp': time(),
+            'transactions': self.current_transactions,
+            'proof': proof,
+            'previous_hash': previous_hash or self.hash(self.chain[-1]),
+        }
 
-       self.current_transactions = []
-       self.chain.append(block)
-       return block
+        self.current_transactions = []
+        self.chain.append(block)
+        return block
 
-   def proof_of_work(self, last_proof):
-       proof = 0
-       while self.valid_proof(last_proof, proof) is False:
-           proof += 1
+    def proof_of_work(self, last_proof):
+        proof = 0
+        while self.valid_proof(last_proof, proof) is False:
+            proof += 1
 
-       return proof
+        return proof
 
-   @staticmethod
-   def valid_proof(last_proof, proof):
-       guess = '{last_proof}{proof}'.encode()
-       guess_hash = hashlib.sha256(guess).hexdigest()
+    @staticmethod
+    def valid_proof(last_proof, proof):
+        guess = f'{last_proof}{proof}'.encode()
+        guess_hash = hashlib.sha256(guess).hexdigest()
 
-       return guess_hash[:4] == "0000"
+        return guess_hash[:4] == "0000"
 
-   def new_transaction(self, sender, recipient, amount):
-       self.current_transactions.append({
-           'sender': sender,
-           'recipient': recipient,
-           'amount': amount,
-       })
+    def new_transaction(self, sender, recipient, amount):
+        self.current_transactions.append({
+            'sender': sender,
+            'recipient': recipient,
+            'amount': amount,
+        })
+        # The transaction goes into the next block to be mined
+        return self.last_block['index'] + 1
 
-   @staticmethod
-   def hash(block):
-       block_string = json.dumps(block, sort_keys=True).encode()
-       return hashlib.sha256(block_string).hexdigest()
+    @staticmethod
+    def hash(block):
+        block_string = json.dumps(block, sort_keys=True).encode()
+        return hashlib.sha256(block_string).hexdigest()
 
-   @property
-   def last_block(self):
-       return self.chain[-1]
+    @property
+    def last_block(self):
+        return self.chain[-1]
 
 
 # Instantiate a new Blockchain
@@ -60,6 +62,9 @@ blockchain = Blockchain()
 
 # Create a Flask app
 app = Flask(__name__)
+
+# Identifier for this node, used as the recipient of mining rewards
+app.config['NODE_IDENTIFIER'] = str(uuid4()).replace('-', '')
 
 
 # Create a new route to mine a block
@@ -78,7 +83,7 @@ def mine():
     blockchain.new_transaction(sender="0", recipient=app.config['NODE_IDENTIFIER'], amount=1)
 
     # Create a new block
-    block = blockchain.new_block(proof, previous_hash=last_block['hash'])
+    block = blockchain.new_block(proof, previous_hash=blockchain.hash(last_block))
 
     # Respond with the new block
     return jsonify({
@@ -106,4 +111,19 @@ def new_transaction():
 
     # Respond with the transaction index
     return jsonify({
-        'message': 'Transaction will be added to Block {index}
+        'message': f'Transaction will be added to Block {index}',
+    }), 201
+
+
+# Create a route to return the full chain
+@app.route('/chain', methods=['GET'])
+def full_chain():
+    return jsonify({
+        'chain': blockchain.chain,
+        'length': len(blockchain.chain),
+    }), 200
+
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000)
+

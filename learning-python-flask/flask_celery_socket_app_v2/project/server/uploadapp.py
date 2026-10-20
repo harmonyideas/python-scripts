@@ -100,7 +100,7 @@ def clients():
     """
     Here, the server responds with a list of connected clients
     """
-    return jsonify(list({"clients": app.clients.keys()}))
+    return jsonify(list(app.clients.keys()))
 
 
 @app.route("/event/", methods=["POST"])
@@ -145,5 +145,6 @@ def events_disconnect():
 
 
 if __name__ == "__main__":
-    socketio.run(port=8982, debug=True, host="0.0.0.0")
+    # Debug is off and the server binds to localhost unless HOST is set explicitly
+    socketio.run(port=8982, debug=False, host=os.environ.get("HOST", "127.0.0.1"))
 

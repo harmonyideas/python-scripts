@@ -6,6 +6,8 @@ class FlashCards():
         self.value = range(0, 10)
 
     def pick_random_cards(self, operation, x, y):
+        if operation == 'D' and y == 0:
+            raise ValueError("Cannot divide by zero")
         result = {
             'M': lambda x, y: x * y,
             'D': lambda x, y: x / y,
@@ -25,6 +27,8 @@ class FlashCards():
         while True:
             x = random.choice(self.value)
             y = random.choice(self.value)
+            if operand == 'D' and y == 0:
+                continue  # Pick another pair instead of dividing by zero
             problem = "%d %s %d = " % (x, operand_symbols, y)
             answer = self.pick_random_cards(operand, x, y)
             user_answer = input(problem)

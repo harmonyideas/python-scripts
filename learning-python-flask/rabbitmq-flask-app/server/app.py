@@ -8,9 +8,37 @@ app = Flask(__name__)
 def index():
     return "OK"
 
+# Required form fields and the maximum length allowed for each one
+CONTACT_FIELDS = {
+    "firstname": 100,
+    "lastname": 100,
+    "country": 100,
+    "subject": 5000,
+}
+
+
+def validate_contactform(form):
+    """Return a list of validation errors. An empty list means the form is valid."""
+    errors = []
+    for field, max_length in CONTACT_FIELDS.items():
+        values = form.getlist(field)
+        if len(values) != 1:
+            errors.append(f"{field} is required and must be given exactly once")
+            continue
+        value = values[0]
+        if not isinstance(value, str) or not value.strip():
+            errors.append(f"{field} must be a non-empty string")
+        elif len(value) > max_length:
+            errors.append(f"{field} must be at most {max_length} characters")
+    return errors
+
+
 @app.route("/contactform", methods=["POST"])
 def contactform():
-    # Validate the request form data
+    # Reject missing, empty, non-string or oversized fields before queuing
+    errors = validate_contactform(request.form)
+    if errors:
+        return jsonify({"status": "error", "errors": errors}), 400
 
     # Convert the request form data to JSON
     form_data = request.form.to_dict(flat=False)

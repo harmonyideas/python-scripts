@@ -1,0 +1,5 @@
+# Packages imported by the top-level scripts in this folder (dictionary.py,
+# myblockchain.py, nettester2.py). Versions are not pinned.
+flask
+dnspython
+python-whois
